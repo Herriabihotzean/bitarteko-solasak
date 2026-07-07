@@ -18,6 +18,16 @@ window.onload = function () {
         bouton.style.padding = "12px";
         bouton.style.textAlign = "left";
 
+        bouton.onclick = function () {
+
+    const lecteur = document.getElementById("lecteur");
+
+    lecteur.src = "audio/" + lecon.audio;
+
+    lecteur.play();
+
+};
+        
         liste.appendChild(bouton);
 
     });
