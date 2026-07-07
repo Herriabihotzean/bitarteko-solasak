@@ -2,7 +2,7 @@ window.onload = function () {
 
     const liste = document.getElementById("liste-conversations");
 
-    conversations.forEach(function(conversation)){
+    conversations.forEach(function(conversation){
 
         const bouton = document.createElement("button");
 
