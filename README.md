@@ -1,1 +1,1 @@
-# bitarteko-solasak
+# Bitarteko-solasak
