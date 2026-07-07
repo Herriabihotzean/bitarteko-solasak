@@ -8,9 +8,9 @@ window.onload = function () {
 
         bouton.innerHTML =
             "🎧 " +
-            lecon.numero +
+            conversation.numero +
             " – " +
-            lecon.titre;
+            conversation.titre;
 
         bouton.style.display = "block";
         bouton.style.width = "100%";
