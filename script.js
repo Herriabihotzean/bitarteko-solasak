@@ -25,8 +25,6 @@ window.onload = function () {
     lecteur.src = "https://drive.google.com/uc?export=download&id=" 
 + conversation.driveId;
 
-    console.log(lecteur.src);
-
     lecteur.play();
 
 };
