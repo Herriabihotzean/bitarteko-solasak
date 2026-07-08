@@ -22,7 +22,7 @@ window.onload = function () {
 
     const lecteur = document.getElementById("lecteur");
 
-    lecteur.src = "https://drive.google.com/file/d/" +
+    lecteur.src = "https://drive.google.com/uc?export=download&id=" +
     conversation.driveId + "/view?usp=drive_link";
 
     lecteur.play();
