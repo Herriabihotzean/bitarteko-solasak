@@ -24,7 +24,7 @@ window.onload = function () {
 
     const lecteur = document.getElementById("lecteur");
 
-    lecteur.src = "audio/001.mp3";
+    lecteur.src = "audio/" + conversation.audio;
 
     lecteur.play();
 
