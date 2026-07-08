@@ -22,7 +22,7 @@ window.onload = function () {
 
     const lecteur = document.getElementById("lecteur");
 
-    lecteur.src = "audio/" + conversation.audio;
+    lecteur.src = "audio/" + conversation.driveId;
 
     lecteur.play();
 
