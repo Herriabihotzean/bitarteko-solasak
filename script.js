@@ -22,7 +22,10 @@ window.onload = function () {
 
     const lecteur = document.getElementById("lecteur");
 
-    lecteur.src = "https://drive.google.com/uc?export=download&id="+conversation.driveId;
+    lecteur.src = "https://drive.google.com/uc?export=download&id=" 
++ conversation.driveId;
+
+lecteur.load();
 
 console.log("Source du lecteur :", lecteur.src);
             
