@@ -161,7 +161,7 @@ const conversations = [
   },
    {
     numero: 33,
-    titre: "Idem, sur l'heure",
+    titre: "Idem. Sur l'heure",
     audio: "033.mp3"
   },
 {
@@ -171,12 +171,12 @@ const conversations = [
   },
 {
     numero: 35,
-    titre: "Idem Pour affirmer et nier une chose",
+    titre: "Idem. Pour affirmer et nier une chose",
     audio: "035.mp3"
   },
   {
     numero: 36,
-    titre: "Idem Pour exprimer le doute, la surprise, l'admiration",
+    titre: "Idem. Pour exprimer le doute, la surprise, l'admiration",
     audio: "036.mp3"
   },
    {
