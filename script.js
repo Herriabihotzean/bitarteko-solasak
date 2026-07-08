@@ -22,7 +22,8 @@ window.onload = function () {
 
     const lecteur = document.getElementById("lecteur");
 
-    lecteur.src = "conversation.audio;
+    lecteur.src =  "https://drive.google.com/uc?export=download&id=" +
+    conversation.driveId;
 
     lecteur.play();
 
