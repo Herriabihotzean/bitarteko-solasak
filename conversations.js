@@ -2,7 +2,7 @@ const conversations = [
   {
     numero: 1,
     titre: "Du départ et du voyage",
-    audio: "https://drive.google.com/file/d/1qGwPTnMxqavwOpEGbB56YZotaO7I_XiU/view?usp=drive_link"
+    driveId: "1qGwPTnMxqavwOpEGbB56YZotaO7I_XiU"
   },
   {
     numero: 2,
