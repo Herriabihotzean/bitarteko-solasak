@@ -20,8 +20,6 @@ window.onload = function () {
 
         bouton.onclick = function () {
 
-    alert("Bouton cliqué");
-
     const lecteur = document.getElementById("lecteur");
 
     lecteur.src = "audio/" + conversation.audio;
