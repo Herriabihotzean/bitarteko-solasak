@@ -20,11 +20,11 @@ window.onload = function () {
 
         bouton.onclick = function () {
 
+    alert("Bouton cliqué");
+
     const lecteur = document.getElementById("lecteur");
 
-    lecteur.src =
-    "audio/" +
-    conversation.audio;
+    lecteur.src = "audio/001.mp3";
 
     lecteur.play();
 
