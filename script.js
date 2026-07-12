@@ -1,20 +1,133 @@
-window.onload = function () {
-    const liste = document.getElementById("liste-conversations");
-    conversations.forEach(function(conversation){
-        const bouton = document.createElement("button");
-        bouton.innerHTML =
-            "🎧 " + conversation.numero +
-            " – " + conversation.titre;
-        bouton.style.display = "block";
-        bouton.style.width = "100%";
-        bouton.style.margin = "8px 0";
-        bouton.style.padding = "12px";
-        bouton.style.textAlign = "left";
-        bouton.onclick = function () {
-            const lecteur = document.getElementById("lecteur");
-            lecteur.src = audio/001.mp3;
-            lecteur.load();
-            console.log("Source du lecteur :", lecteur.src);
-            lecteur.play();
-        };
-        liste.appendChild(bouton); }); };
+"use strict";
+
+const lecteur = document.getElementById("lecteur");
+const listeConversations = document.getElementById("liste-conversations");
+const titreEnCours = document.getElementById("titre-en-cours");
+const message = document.getElementById("message");
+
+let indexEnCours = -1;
+
+
+/*
+    Création automatique des 62 boutons
+*/
+conversations.forEach(function (conversation, index) {
+    const bouton = document.createElement("button");
+
+    bouton.type = "button";
+    bouton.className = "conversation";
+    bouton.dataset.index = index;
+
+    const numero = String(conversation.numero).padStart(2, "0");
+
+    bouton.innerHTML =
+        '<span class="numero">' +
+        numero +
+        ".</span>" +
+        "<span>" +
+        conversation.titre +
+        "</span>";
+
+    bouton.addEventListener("click", function () {
+        lireConversation(index);
+    });
+
+    listeConversations.appendChild(bouton);
+});
+
+
+/*
+    Lance la conversation choisie
+*/
+function lireConversation(index) {
+    if (index < 0 || index >= conversations.length) {
+        return;
+    }
+
+    indexEnCours = index;
+
+    const conversation = conversations[indexEnCours];
+
+    message.textContent = "";
+
+    lecteur.src = conversation.audio;
+    lecteur.load();
+
+    titreEnCours.textContent =
+        "Conversation " +
+        conversation.numero +
+        " — " +
+        conversation.titre;
+
+    actualiserBoutonActif();
+
+    lecteur.play().catch(function (erreur) {
+        console.error("La lecture n’a pas pu commencer :", erreur);
+
+        message.textContent =
+            "La lecture n’a pas pu commencer. Vérifiez que le fichier " +
+            conversation.audio +
+            " existe bien.";
+    });
+}
+
+
+/*
+    Met en évidence la conversation en cours
+*/
+function actualiserBoutonActif() {
+    const boutons = document.querySelectorAll(".conversation");
+
+    boutons.forEach(function (bouton, index) {
+        if (index === indexEnCours) {
+            bouton.classList.add("active");
+        } else {
+            bouton.classList.remove("active");
+        }
+    });
+}
+
+
+/*
+    Lorsque la piste se termine,
+    la piste suivante commence automatiquement
+*/
+lecteur.addEventListener("ended", function () {
+    const prochainIndex = indexEnCours + 1;
+
+    if (prochainIndex < conversations.length) {
+        lireConversation(prochainIndex);
+    } else {
+        titreEnCours.textContent =
+            "La dernière conversation est terminée.";
+
+        message.textContent =
+            "Vous avez atteint la fin du Manuel de la conversation.";
+
+        indexEnCours = -1;
+        actualiserBoutonActif();
+    }
+});
+
+
+/*
+    Affiche un message si le fichier audio est introuvable
+    ou ne peut pas être lu
+*/
+lecteur.addEventListener("error", function () {
+    if (indexEnCours === -1) {
+        return;
+    }
+
+    const conversation = conversations[indexEnCours];
+
+    console.error(
+        "Impossible de charger le fichier :",
+        conversation.audio
+    );
+
+    message.textContent =
+        "Impossible de charger le fichier « " +
+        conversation.audio +
+        " ». Vérifiez son nom et son emplacement.";
+});
