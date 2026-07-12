@@ -22,15 +22,37 @@ window.onload = function () {
 
     const lecteur = document.getElementById("lecteur");
 
-    lecteur.src = "audio/001.mp3";
+ // -------------------------------------------------------------------
+// Lecture d'une conversation
+// -------------------------------------------------------------------
 
-lecteur.load();
+function lireConversation(index) {
 
-console.log("Source du lecteur :", lecteur.src);
-            
+    conversationCourante = index;
+
+    const conversation = conversations[index];
+
+    // Vérifie qu'un identifiant Google Drive existe
+
+    if (conversation.driveId === "") {
+
+        alert("Cette conversation n'a pas encore de fichier audio.");
+
+        return;
+
+    }
+
+    lecteur.src =
+        "https://drive.google.com/uc?export=download&id=" +
+        conversation.driveId;
+
+    lecteur.load();
+
     lecteur.play();
 
-};
+}
+
+        
         
         liste.appendChild(bouton);
 
