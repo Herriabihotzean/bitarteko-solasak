@@ -1,32 +1,20 @@
 window.onload = function () {
-
-    const lecteur = document.getElementById("lecteur");
-    const source = document.getElementById("source-audio");
     const liste = document.getElementById("liste-conversations");
-
     conversations.forEach(function(conversation){
-
         const bouton = document.createElement("button");
-
-        bouton.textContent =
-            "🎧 " +
-            conversation.numero +
-            " – " +
-            conversation.titre;
-
-        bouton.onclick = function(){
-
-            lecteur.src = "https://drive.google.com/uc?export=download&id=" +
-        conversation.driveId;
-
-            lecteur.download();
-
+        bouton.innerHTML =
+            "🎧 " + conversation.numero +
+            " – " + conversation.titre;
+        bouton.style.display = "block";
+        bouton.style.width = "100%";
+        bouton.style.margin = "8px 0";
+        bouton.style.padding = "12px";
+        bouton.style.textAlign = "left";
+        bouton.onclick = function () {
+            const lecteur = document.getElementById("lecteur");
+            lecteur.src = "audio/001.mp3";
+            lecteur.load();
+            console.log("Source du lecteur :", lecteur.src);
             lecteur.play();
-
         };
-
-        liste.appendChild(bouton);
-
-    });
-
-};
+        liste.appendChild(bouton); }); };
