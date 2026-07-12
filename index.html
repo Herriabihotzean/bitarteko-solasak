@@ -59,6 +59,39 @@
             margin: 0;
             font-size: 1.1rem;
         }
+        #entete-titres {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            width: min(900px, 100%);
+            margin: 0 auto 10px;
+        }
+
+        #bloc-titres {
+            flex: 1;
+            text-align: center;
+        }
+
+        .blason {
+            width: 85px;
+            height: 85px;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            line-height: 1.15;
+        }
+
+        #sous-titre {
+            margin: 5px 0 0;
+            font-size: 1.05rem;
+            font-weight: bold;
+            letter-spacing: 0.14em;
+        }
 
         main {
             width: min(900px, 94%);
@@ -167,13 +200,70 @@
                 padding: 16px;
             }
         }
+        @media (max-width: 600px) {
+
+            header {
+                padding: 10px 12px 12px;
+            }
+
+            #entete-titres {
+                gap: 10px;
+            }
+
+            .blason {
+                width: 48px;
+                height: 48px;
+            }
+
+            h1 {
+                font-size: 1.25rem;
+            }
+
+            #sous-titre {
+                font-size: 0.8rem;
+                letter-spacing: 0.09em;
+            }
+
+            #titre-en-cours {
+                font-size: 0.9rem;
+            }
+
+            main {
+                width: 96%;
+                margin-top: 14px;
+                padding: 16px;
+            }
+
+            #liste-conversations {
+                column-count: 1;
+            }
+        }
     </style>
 </head>
 
 <body>
 
     <header id="bandeau-fixe">
-    <h1>Manuel de la conversation, 1861</h1>
+     <div id="entete-titres">
+
+        <img
+            src="blason-navarre.png"
+            class="blason"
+            alt="Blason de la Navarre"
+        >
+
+        <div id="bloc-titres">
+            <h1>Manuel de la conversation</h1>
+            <p id="sous-titre">BITARTEKO SOLASAK</p>
+        </div>
+
+        <img
+            src="blason-labourd.png"
+            class="blason"
+            alt="Blason du Labourd"
+        >
+
+    </div>
 
     <p id="titre-en-cours">
         Sélectionnez une conversation
