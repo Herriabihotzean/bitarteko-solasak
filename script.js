@@ -16,7 +16,7 @@ window.onload = function () {
 
         bouton.onclick = function(){
 
-            source.src = "https://drive.google.com/uc?export=download&id=" +
+            lecteur.src = "https://drive.google.com/uc?export=download&id=" +
         conversation.driveId;
 
             lecteur.load();
