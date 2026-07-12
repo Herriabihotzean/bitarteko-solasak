@@ -1,77 +1,39 @@
-// Récupération des éléments de la page
+window.onload = function () {
 
-const liste = document.getElementById("listeConversations");
-const lecteur = document.getElementById("lecteur");
+    const liste = document.getElementById("liste-conversations");
 
-// Numéro de la conversation actuellement lue
+    conversations.forEach(function(conversation){
 
-let conversationCourante = 0;
+        const bouton = document.createElement("button");
 
+        bouton.innerHTML =
+            "🎧 " +
+            conversation.numero +
+            " – " +
+            conversation.titre;
 
-// -------------------------------------------------------------------
-// Création automatique de la liste des conversations
-// -------------------------------------------------------------------
+        bouton.style.display = "block";
+        bouton.style.width = "100%";
+        bouton.style.margin = "8px 0";
+        bouton.style.padding = "12px";
+        bouton.style.textAlign = "left";
 
-conversations.forEach((conversation, index) => {
+        bouton.onclick = function () {
 
-    const li = document.createElement("li");
+    const lecteur = document.getElementById("lecteur");
 
-    li.textContent = conversation.numero + " - " + conversation.titre;
+    lecteur.src = "audio/001.mp3";
 
-    li.addEventListener("click", function () {
+lecteur.load();
 
-        lireConversation(index);
+console.log("Source du lecteur :", lecteur.src);
+            
+    lecteur.play();
+
+};
+        
+        liste.appendChild(bouton);
 
     });
 
-    liste.appendChild(li);
-
-});
-
-
-// -------------------------------------------------------------------
-// Lecture d'une conversation
-// -------------------------------------------------------------------
-
-function lireConversation(index) {
-
-    conversationCourante = index;
-
-    const conversation = conversations[index];
-
-    // Vérifie qu'un identifiant Google Drive existe
-
-    if (conversation.driveId === "") {
-
-        alert("Cette conversation n'a pas encore de fichier audio.");
-
-        return;
-
-    }
-
-    lecteur.src =
-        "https://drive.google.com/uc?export=download&id=" +
-        conversation.driveId;
-
-    lecteur.load();
-
-    lecteur.play();
-
-}
-
-
-// -------------------------------------------------------------------
-// Passage automatique à la conversation suivante
-// -------------------------------------------------------------------
-
-lecteur.addEventListener("ended", function () {
-
-    conversationCourante++;
-
-    if (conversationCourante < conversations.length) {
-
-        lireConversation(conversationCourante);
-
-    }
-
-});
+};
