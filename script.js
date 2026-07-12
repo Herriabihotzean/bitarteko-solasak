@@ -1,53 +1,77 @@
-const liste=document.getElementById("listeConversations");
+// Récupération des éléments de la page
 
-const lecteur=document.getElementById("lecteur");
+const liste = document.getElementById("listeConversations");
+const lecteur = document.getElementById("lecteur");
 
-let conversationCourante=0;
+// Numéro de la conversation actuellement lue
+
+let conversationCourante = 0;
 
 
+// -------------------------------------------------------------------
+// Création automatique de la liste des conversations
+// -------------------------------------------------------------------
 
-conversations.forEach((conversation,index)=>{
+conversations.forEach((conversation, index) => {
 
-const li=document.createElement("li");
+    const li = document.createElement("li");
 
-li.textContent=conversation.numero+" - "+conversation.titre;
+    li.textContent = conversation.numero + " - " + conversation.titre;
 
-li.onclick=()=>{
+    li.addEventListener("click", function () {
 
-lireConversation(index);
+        lireConversation(index);
 
-};
+    });
 
-liste.appendChild(li);
+    liste.appendChild(li);
 
 });
 
 
+// -------------------------------------------------------------------
+// Lecture d'une conversation
+// -------------------------------------------------------------------
 
-function lireConversation(index){
+function lireConversation(index) {
 
-conversationCourante=index;
+    conversationCourante = index;
 
-const conversation=conversations[index];
+    const conversation = conversations[index];
 
-lecteur.src="https://drive.google.com/uc?export=download&id="+conversation.driveId;
+    // Vérifie qu'un identifiant Google Drive existe
 
-lecteur.load();
+    if (conversation.driveId === "") {
 
-lecteur.play();
+        alert("Cette conversation n'a pas encore de fichier audio.");
+
+        return;
+
+    }
+
+    lecteur.src =
+        "https://drive.google.com/uc?export=download&id=" +
+        conversation.driveId;
+
+    lecteur.load();
+
+    lecteur.play();
 
 }
 
 
+// -------------------------------------------------------------------
+// Passage automatique à la conversation suivante
+// -------------------------------------------------------------------
 
-lecteur.addEventListener("ended",()=>{
+lecteur.addEventListener("ended", function () {
 
-conversationCourante++;
+    conversationCourante++;
 
-if(conversationCourante<conversations.length){
+    if (conversationCourante < conversations.length) {
 
-lireConversation(conversationCourante);
+        lireConversation(conversationCourante);
 
-}
+    }
 
 });
