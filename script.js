@@ -1,39 +1,53 @@
-window.onload = function () {
+const liste=document.getElementById("listeConversations");
 
-    const liste = document.getElementById("liste-conversations");
+const lecteur=document.getElementById("lecteur");
 
-    conversations.forEach(function(conversation){
+let conversationCourante=0;
 
-        const bouton = document.createElement("button");
 
-        bouton.innerHTML =
-            "🎧 " +
-            conversation.numero +
-            " – " +
-            conversation.titre;
 
-        bouton.style.display = "block";
-        bouton.style.width = "100%";
-        bouton.style.margin = "8px 0";
-        bouton.style.padding = "12px";
-        bouton.style.textAlign = "left";
+conversations.forEach((conversation,index)=>{
 
-        bouton.onclick = function () {
+const li=document.createElement("li");
 
-    const lecteur = document.getElementById("lecteur");
+li.textContent=conversation.numero+" - "+conversation.titre;
 
-    lecteur.src = "audio/001.mp3";
+li.onclick=()=>{
+
+lireConversation(index);
+
+};
+
+liste.appendChild(li);
+
+});
+
+
+
+function lireConversation(index){
+
+conversationCourante=index;
+
+const conversation=conversations[index];
+
+lecteur.src="https://drive.google.com/uc?export=download&id="+conversation.driveId;
 
 lecteur.load();
 
-console.log("Source du lecteur :", lecteur.src);
-            
-    lecteur.play();
+lecteur.play();
 
-};
-        
-        liste.appendChild(bouton);
+}
 
-    });
 
-};
+
+lecteur.addEventListener("ended",()=>{
+
+conversationCourante++;
+
+if(conversationCourante<conversations.length){
+
+lireConversation(conversationCourante);
+
+}
+
+});
