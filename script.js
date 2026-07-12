@@ -16,7 +16,8 @@ window.onload = function () {
 
         bouton.onclick = function(){
 
-            source.src = "audio/001.mp3";
+            source.src = "https://drive.google.com/uc?export=download&id=" +
+        conversation.driveId;
 
             lecteur.load();
 
