@@ -56,6 +56,6 @@ function lireConversation(index) {
         
         liste.appendChild(bouton);
 
-    });
+    };
 
 };
