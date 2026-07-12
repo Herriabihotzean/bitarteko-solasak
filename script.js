@@ -19,7 +19,7 @@ window.onload = function () {
             lecteur.src = "https://drive.google.com/uc?export=download&id=" +
         conversation.driveId;
 
-            lecteur.load();
+            lecteur.download();
 
             lecteur.play();
 
