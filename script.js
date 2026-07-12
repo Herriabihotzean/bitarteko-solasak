@@ -12,7 +12,7 @@ window.onload = function () {
         bouton.style.textAlign = "left";
         bouton.onclick = function () {
             const lecteur = document.getElementById("lecteur");
-            lecteur.src = "audio/001.mp3";
+            lecteur.src = audio/001.mp3;
             lecteur.load();
             console.log("Source du lecteur :", lecteur.src);
             lecteur.play();
