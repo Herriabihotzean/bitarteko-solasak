@@ -54,7 +54,7 @@ function lireConversation(index) {
     lecteur.load();
 
     titreEnCours.textContent =
-        "Conversation " +
+        "Dialogue " +
         conversation.numero +
         " — " +
         conversation.titre;
