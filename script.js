@@ -2,6 +2,7 @@
 
 const lecteur = document.getElementById("lecteur");
 const listeConversations = document.getElementById("liste-conversations");
+const zoneAvantPropos = document.getElementById("zone-avant-propos");
 const titreEnCours = document.getElementById("titre-en-cours");
 const message = document.getElementById("message");
 
@@ -43,7 +44,13 @@ conversations.forEach(function (conversation, index) {
         lireConversation(index);
     });
 
-    listeConversations.appendChild(bouton);
+    if (conversation.numero === 0) {
+        zoneAvantPropos.appendChild(bouton);
+    }
+    
+    else {
+        listeConversations.appendChild(bouton);
+    }
 });
 
 
