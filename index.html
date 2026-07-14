@@ -265,56 +265,66 @@
             }
         }
         
-            #zone-livre{
-
-                position:fixed;
-
-                right:20px;
-
-                bottom:15px;
-
-                z-index:1000;
-
+            #zone-livre {
+                position: fixed;
+                right: 18px;
+                bottom: 8px;
+                z-index: 1000;
             }
 
-            #livre{
+            .lien-livre {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
-                width:115px;
-
-                height:auto;
-
-                transition:0.25s;
-
-                cursor:pointer;
-
+                color: white;
+                text-decoration: none;
             }
 
-            #livre:hover{
+            #livre {
+                display: block;
+                width: 105px;
+                height: auto;
 
-                transform:
-                translateY(-3px)
-                scale(1.04);
-
+                cursor: pointer;
+                transition: transform 0.25s;
             }
 
-        @media (max-width:700px){
+            .texte-commander {
+                margin-top: 2px;
 
-            #zone-livre{
+                font-family: Georgia, "Times New Roman", serif;
+                font-size: 0.82rem;
+                font-weight: normal;
+                line-height: 1;
 
-                position:static;
-
-                text-align:center;
-
-                margin-top:35px;
-
+                text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
             }
 
-            #livre{
-
-                width:90px;
-
+            .lien-livre:hover #livre {
+                transform: translateY(-3px) scale(1.03);
             }
 
+            .lien-livre:hover .texte-commander {
+                text-decoration: underline;
+            }
+
+        @media (max-width: 700px) {
+
+            #zone-livre {
+                position: static;
+                margin-top: 30px;
+                text-align: center;
+            }
+
+            #livre {
+                width: 90px;
+            }
+
+            .texte-commander {
+                font-size: 0.78rem;
+            }
+        }
         }
     </style>
 </head>
@@ -366,12 +376,17 @@
     
     <div id="zone-livre">
 
-        <a href="commander.html">
+        <a href="commander.html" class="lien-livre">
 
             <img
                 src="livre.png"
                 id="livre"
-                alt="Commander le livre">
+                alt="Commander le livre"
+            >
+
+            <span class="texte-commander">
+                Commander
+            </span>
 
         </a>
 
