@@ -1,1 +1,763 @@
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Commander le Manuel de la conversation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px 15px;
+
+            font-family: Georgia, "Times New Roman", serif;
+            color: white;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0.45)
+                ),
+                url("Un dimanche d'été à Ascain.jpeg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        main {
+            width: min(760px, 96%);
+            margin: 0 auto;
+            padding: 30px;
+
+            background-color: rgba(20, 55, 32, 0.94);
+            border-radius: 14px;
+
+            box-shadow:
+                0 6px 22px
+                rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .sous-titre {
+            margin: 6px 0 28px;
+            text-align: center;
+
+            font-size: 1rem;
+            font-weight: bold;
+            letter-spacing: 0.13em;
+        }
+
+        .introduction {
+            max-width: 620px;
+            margin: 0 auto 28px;
+
+            text-align: center;
+            line-height: 1.55;
+        }
+
+        fieldset {
+            margin: 0 0 22px;
+            padding: 20px;
+
+            border: 1px solid
+                rgba(255, 255, 255, 0.55);
+
+            border-radius: 10px;
+
+            background-color:
+                rgba(255, 255, 255, 0.07);
+        }
+
+        legend {
+            padding: 0 10px;
+            font-weight: bold;
+        }
+
+        .ligne {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .champ {
+            margin-bottom: 16px;
+        }
+
+        .champ:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 12px;
+
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+
+            background-color: white;
+            color: #222222;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 1rem;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: 3px solid
+                rgba(255, 233, 168, 0.45);
+
+            border-color: #ffe9a8;
+        }
+
+        .obligatoire {
+            color: #ffe9a8;
+        }
+
+        .choix-civilite {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .choix-civilite label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .choix-civilite input {
+            width: auto;
+        }
+
+        .resume {
+            margin: 0 0 22px;
+            padding: 18px;
+
+            border-radius: 10px;
+
+            background-color:
+                rgba(0, 0, 0, 0.22);
+
+            line-height: 1.55;
+        }
+
+        .resume h2 {
+            margin: 0 0 12px;
+            font-size: 1.2rem;
+        }
+
+        .resume p {
+            margin: 5px 0;
+        }
+
+        #total {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .consentement {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+
+            margin: 22px 0;
+            line-height: 1.4;
+        }
+
+        .consentement input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .consentement label {
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .bouton-commande {
+            display: block;
+            width: 100%;
+            padding: 14px 20px;
+
+            border: 0;
+            border-radius: 8px;
+
+            background-color: #f6f3ea;
+            color: rgb(20, 55, 32);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 1.05rem;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .bouton-commande:hover {
+            background-color: #ffe9a8;
+        }
+
+        .bouton-commande:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        #message-formulaire {
+            min-height: 24px;
+            margin: 16px 0 0;
+
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .retour {
+            display: block;
+            margin-top: 25px;
+
+            color: white;
+            text-align: center;
+        }
+
+        .petit-texte {
+            margin-top: 20px;
+
+            font-size: 0.84rem;
+            line-height: 1.45;
+            opacity: 0.88;
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 12px 6px;
+            }
+
+            main {
+                width: 98%;
+                padding: 22px 14px;
+            }
+
+            h1 {
+                font-size: 1.55rem;
+            }
+
+            .ligne {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            fieldset {
+                padding: 16px 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+
+        <h1>Manuel de la conversation, 1861</h1>
+
+        <p class="sous-titre">
+            BITARTEKO SOLASAK eta LETRAK
+        </p>
+
+        <div class="introduction">
+            <p>
+                Remplissez ce formulaire pour préparer votre commande.
+            </p>
+
+            <p>
+                Après validation, vous serez dirigé vers le paiement
+                sécurisé. Le livre ne sera expédié qu’après vérification
+                du paiement.
+            </p>
+        </div>
+
+        <form id="formulaire-commande">
+
+            <fieldset>
+                <legend>Destinataire</legend>
+
+                <div class="champ">
+                    <label>
+                        Civilité
+                        <span class="obligatoire">*</span>
+                    </label>
+
+                    <div class="choix-civilite">
+                        <label>
+                            <input
+                                type="radio"
+                                name="civilite"
+                                value="M."
+                                required
+                            >
+                            M.
+                        </label>
+
+                        <label>
+                            <input
+                                type="radio"
+                                name="civilite"
+                                value="Mme"
+                                required
+                            >
+                            Mme
+                        </label>
+                    </div>
+                </div>
+
+                <div class="ligne">
+
+                    <div class="champ">
+                        <label for="prenom">
+                            Prénom
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="prenom"
+                            name="prenom"
+                            autocomplete="given-name"
+                            required
+                        >
+                    </div>
+
+                    <div class="champ">
+                        <label for="nom">
+                            Nom
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nom"
+                            name="nom"
+                            autocomplete="family-name"
+                            required
+                        >
+                    </div>
+
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Adresse de livraison</legend>
+
+                <div class="champ">
+                    <label for="adresse1">
+                        Numéro et nom de la voie
+                        <span class="obligatoire">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adresse1"
+                        name="adresse1"
+                        placeholder="12 rue des Fougères"
+                        autocomplete="address-line1"
+                        required
+                    >
+                </div>
+
+                <div class="champ">
+                    <label for="adresse2">
+                        Complément d’adresse
+                    </label>
+
+                    <input
+                        type="text"
+                        id="adresse2"
+                        name="adresse2"
+                        placeholder="Bâtiment, étage, lieu-dit…"
+                        autocomplete="address-line2"
+                    >
+                </div>
+
+                <div class="ligne">
+
+                    <div class="champ">
+                        <label for="codePostal">
+                            Code postal
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="codePostal"
+                            name="codePostal"
+                            autocomplete="postal-code"
+                            required
+                        >
+                    </div>
+
+                    <div class="champ">
+                        <label for="ville">
+                            Ville
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="ville"
+                            name="ville"
+                            autocomplete="address-level2"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <div class="champ">
+                    <label for="pays">
+                        Pays
+                        <span class="obligatoire">*</span>
+                    </label>
+
+                    <select
+                        id="pays"
+                        name="pays"
+                        autocomplete="country-name"
+                        required
+                    >
+                        <option value="">
+                            Sélectionnez un pays
+                        </option>
+
+                        <option value="France">
+                            France
+                        </option>
+
+                        <option value="Espagne">
+                            Espagne
+                        </option>
+
+                        <option value="Belgique">
+                            Belgique
+                        </option>
+
+                        <option value="Luxembourg">
+                            Luxembourg
+                        </option>
+
+                        <option value="Suisse">
+                            Suisse
+                        </option>
+
+                        <option value="Autre">
+                            Autre pays
+                        </option>
+                    </select>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Coordonnées</legend>
+
+                <div class="champ">
+                    <label for="email">
+                        Adresse électronique
+                        <span class="obligatoire">*</span>
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="champ">
+                    <label for="telephone">
+                        Téléphone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telephone"
+                        name="telephone"
+                        autocomplete="tel"
+                    >
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Commande</legend>
+
+                <div class="ligne">
+
+                    <div class="champ">
+                        <label for="quantite">
+                            Quantité
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <select
+                            id="quantite"
+                            name="quantite"
+                            required
+                        >
+                            <option value="1">1 exemplaire</option>
+                            <option value="2">2 exemplaires</option>
+                            <option value="3">3 exemplaires</option>
+                            <option value="4">4 exemplaires</option>
+                            <option value="5">5 exemplaires</option>
+                        </select>
+                    </div>
+
+                    <div class="champ">
+                        <label for="livraison">
+                            Mode de livraison
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <select
+                            id="livraison"
+                            name="livraison"
+                            required
+                        >
+                            <option value="">
+                                Choisissez
+                            </option>
+
+                            <option
+                                value="Retrait sur place"
+                                data-prix="0"
+                            >
+                                Retrait sur place — 0 €
+                            </option>
+
+                            <option
+                                value="Livraison France"
+                                data-prix="7"
+                            >
+                                Livraison en France — 7 €
+                            </option>
+
+                            <option
+                                value="Livraison Europe"
+                                data-prix="14"
+                            >
+                                Livraison en Europe — 14 €
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="champ">
+                    <label for="remarques">
+                        Remarques éventuelles
+                    </label>
+
+                    <textarea
+                        id="remarques"
+                        name="remarques"
+                        placeholder="Informations utiles pour la livraison…"
+                    ></textarea>
+                </div>
+            </fieldset>
+
+            <div class="resume">
+                <h2>Récapitulatif</h2>
+
+                <p>
+                    Prix d’un livre :
+                    <strong>
+                        <span id="prix-unitaire">35</span> €
+                    </strong>
+                </p>
+
+                <p>
+                    Frais de livraison :
+                    <strong>
+                        <span id="prix-livraison">0</span> €
+                    </strong>
+                </p>
+
+                <p id="total">
+                    Total :
+                    <span id="prix-total">35</span> €
+                </p>
+            </div>
+
+            <div class="consentement">
+
+                <input
+                    type="checkbox"
+                    id="accord"
+                    name="accord"
+                    required
+                >
+
+                <label for="accord">
+                    J’accepte que les informations saisies soient utilisées
+                    uniquement pour traiter et expédier cette commande.
+                </label>
+
+            </div>
+
+            <button
+                type="submit"
+                id="bouton-commande"
+                class="bouton-commande"
+            >
+                Enregistrer la commande
+            </button>
+
+            <p id="message-formulaire"></p>
+
+        </form>
+
+        <p class="petit-texte">
+            Aucune donnée bancaire n’est recueillie par cette page.
+            Le paiement sera effectué ultérieurement sur le site sécurisé
+            du prestataire de paiement.
+        </p>
+
+        <a class="retour" href="index.html">
+            ← Revenir aux enregistrements
+        </a>
+
+    </main>
+
+    <script>
+        "use strict";
+
+        const PRIX_LIVRE = 35;
+
+        const formulaire =
+            document.getElementById("formulaire-commande");
+
+        const quantite =
+            document.getElementById("quantite");
+
+        const livraison =
+            document.getElementById("livraison");
+
+        const prixLivraison =
+            document.getElementById("prix-livraison");
+
+        const prixTotal =
+            document.getElementById("prix-total");
+
+        const boutonCommande =
+            document.getElementById("bouton-commande");
+
+        const messageFormulaire =
+            document.getElementById("message-formulaire");
+
+
+        function calculerTotal() {
+            const nombreLivres =
+                Number(quantite.value);
+
+            const optionChoisie =
+                livraison.options[livraison.selectedIndex];
+
+            const frais =
+                Number(optionChoisie.dataset.prix || 0);
+
+            const total =
+                (PRIX_LIVRE * nombreLivres) + frais;
+
+            prixLivraison.textContent =
+                frais.toFixed(2).replace(".00", "");
+
+            prixTotal.textContent =
+                total.toFixed(2).replace(".00", "");
+        }
+
+
+        quantite.addEventListener(
+            "change",
+            calculerTotal
+        );
+
+        livraison.addEventListener(
+            "change",
+            calculerTotal
+        );
+
+
+        formulaire.addEventListener(
+            "submit",
+            function (evenement) {
+                evenement.preventDefault();
+
+                if (!formulaire.checkValidity()) {
+                    formulaire.reportValidity();
+                    return;
+                }
+
+                boutonCommande.disabled = true;
+
+                messageFormulaire.textContent =
+                    "Le formulaire est prêt. " +
+                    "Il reste à le relier au service d’envoi.";
+
+                /*
+                    À l’étape suivante, ce bloc sera remplacé
+                    par l’envoi vers Google Apps Script.
+                */
+
+                setTimeout(function () {
+                    boutonCommande.disabled = false;
+                }, 1200);
+            }
+        );
+
+
+        calculerTotal();
+    </script>
+
+</body>
+
+</html>
