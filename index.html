@@ -263,84 +263,55 @@
             #liste-conversations {
                 column-count: 1;
             }
+        
+            #zone-livre{
+
+                position:fixed;
+
+                right:20px;
+
+                bottom:15px;
+
+                z-index:1000;
+
+            }
+
+            #livre{
+
+                width:115px;
+
+                height:auto;
+
+                transition:0.25s;
+
+                cursor:pointer;
+
+            }
+
+            #livre:hover{
+
+                transform:
+                translateY(-3px)
+                scale(1.04);
+
+            }
         }
-        #zone-livre{
 
-            position:fixed;
-
-            right:30px;
-
-            bottom:30px;
-
-            z-index:1000;
-
-        }
-        .livre{
-
-            display:block;
-
-            width:150px;
-
-            padding:20px;
-
-            text-align:center;
-
-            text-decoration:none;
-
-            color:white;
-
-            background-color:
-            rgba(0,0,0,0.80);
-
-            border-radius:10px;
-
-            border:1px solid
-            rgba(255,255,255,0.70);
-
-            box-shadow:
-            0 4px 15px
-            rgba(0,0,0,0.40);
-
-            transition:0.25s;
-        }
-        .livre:hover{
-
-            transform:
-            translateY(-2px);
-
-            background-color:
-            rgba(255,255,255,0.25);
-
-        }
-        .emoji-livre{
-
-            font-size:3rem;
-
-            margin-bottom:10px;
-
-        }
-        .texte-livre{
-
-            font-weight:bold;
-
-            line-height:1.4;
-
-        }
         @media (max-width:700px){
 
             #zone-livre{
 
                 position:static;
 
-                margin-top:30px;
-
                 text-align:center;
+
+                margin-top:35px;
 
             }
 
-            .livre{
+            #livre{
 
-                display:inline-block;
+                width:90px;
 
             }
 
@@ -392,20 +363,15 @@
     <div id="liste-conversations"></div>
 
     <p id="message"></p>
+    
     <div id="zone-livre">
 
-        <a
-            href="commander.html"
-            class="livre">
+        <a href="commander.html">
 
-            <div class="emoji-livre">
-                📖
-            </div>
-
-            <div class="texte-livre">
-                Commander<br>
-                le livre
-            </div>
+            <img
+                src="livre.png"
+                id="livre"
+                alt="Commander le livre">
 
         </a>
 
