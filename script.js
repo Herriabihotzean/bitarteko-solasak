@@ -18,15 +18,24 @@ conversations.forEach(function (conversation, index) {
     bouton.className = "conversation";
     bouton.dataset.index = index;
 
-    const numero = String(conversation.numero).padStart(2, "0");
+    if (conversation.numero === 0) {
 
-    bouton.innerHTML =
-        '<span class="numero">' +
-        numero +
-        ".</span>" +
-        "<span>" +
-        conversation.titre +
-        "</span>";
+        bouton.innerHTML =
+           "<span>" +
+            conversation.titre.toUpperCase() +
+            "</span>";
+
+    } else {
+
+        bouton.innerHTML =
+            "<span>" +
+            "Dialogue " +
+            conversation.numero +
+            " – " +
+            conversation.titre +
+            "</span>";
+
+    }
 
     bouton.addEventListener("click", function () {
         lireConversation(index);
