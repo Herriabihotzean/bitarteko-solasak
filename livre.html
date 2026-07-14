@@ -1,1 +1,272 @@
+<!DOCTYPE html>
+<html lang="fr">
 
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Le Manuel de la conversation, 1861</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px 15px;
+
+            font-family: Georgia, "Times New Roman", serif;
+            color: white;
+
+            background-image:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.42),
+                    rgba(0, 0, 0, 0.42)
+                ),
+                url("Un dimanche d'été à Ascain.jpeg");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        main {
+            width: min(900px, 96%);
+            margin: 0 auto;
+            padding: 32px;
+
+            background-color: rgba(20, 55, 32, 0.94);
+            border-radius: 14px;
+
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 2.1rem;
+        }
+
+        .sous-titre {
+            margin: 7px 0 30px;
+
+            text-align: center;
+            font-weight: bold;
+            letter-spacing: 0.13em;
+        }
+
+        .presentation-livre {
+            display: grid;
+            grid-template-columns: minmax(220px, 340px) 1fr;
+            align-items: center;
+            gap: 38px;
+        }
+
+        .image-livre {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .description {
+            font-size: 1.05rem;
+            line-height: 1.65;
+        }
+
+        .description h2 {
+            margin-top: 0;
+            font-size: 1.45rem;
+        }
+
+        .caracteristiques {
+            margin: 24px 0;
+            padding: 18px 20px;
+
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 9px;
+
+            background-color: rgba(255, 255, 255, 0.07);
+        }
+
+        .caracteristiques p {
+            margin: 7px 0;
+        }
+
+        .prix {
+            margin: 25px 0 18px;
+
+            font-size: 1.45rem;
+            font-weight: bold;
+        }
+
+        .livraison {
+            margin: 0 0 23px;
+            font-size: 0.95rem;
+        }
+
+        .bouton-commander {
+            display: inline-block;
+            padding: 13px 24px;
+
+            border-radius: 8px;
+
+            background-color: #f6f3ea;
+            color: rgb(20, 55, 32);
+
+            font-size: 1.05rem;
+            font-weight: bold;
+            text-decoration: none;
+
+            transition:
+                background-color 0.2s,
+                transform 0.2s;
+        }
+
+        .bouton-commander:hover {
+            background-color: #ffe9a8;
+            transform: translateY(-2px);
+        }
+
+        .retour {
+            display: block;
+            margin-top: 32px;
+
+            color: white;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 12px 6px;
+            }
+
+            main {
+                width: 98%;
+                padding: 22px 15px;
+            }
+
+            h1 {
+                font-size: 1.55rem;
+            }
+
+            .presentation-livre {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .image-livre {
+                width: min(320px, 90%);
+                margin: 0 auto;
+            }
+
+            .description {
+                text-align: center;
+            }
+
+            .caracteristiques {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+
+        <h1>Manuel de la conversation, 1861</h1>
+
+        <p class="sous-titre">
+            BITARTEKO SOLASAK eta LETRAK
+        </p>
+
+        <div class="presentation-livre">
+
+            <div>
+                <img
+                    src="livre.png"
+                    class="image-livre"
+                    alt="Couverture du Manuel de la conversation"
+                >
+            </div>
+
+            <div class="description">
+
+                <h2>Présentation de l’ouvrage</h2>
+
+                <p>
+                    Le <em>Manuel de la conversation</em>, publié en 1861,
+                    rassemble des dialogues, des modèles de lettres et des
+                    expressions destinés à faciliter la conversation en
+                    français et en basque.
+                </p>
+
+                <p>
+                    Cette édition permet de retrouver l’ensemble du texte
+                    accompagné des enregistrements disponibles sur le site.
+                </p>
+
+                <div class="caracteristiques">
+
+                    <p>
+                        <strong>Titre :</strong>
+                        Manuel de la conversation
+                    </p>
+
+                    <p>
+                        <strong>Année de l’ouvrage original :</strong>
+                        1861
+                    </p>
+
+                    <p>
+                        <strong>Format :</strong>
+                        À préciser
+                    </p>
+
+                    <p>
+                        <strong>Nombre de pages :</strong>
+                        À préciser
+                    </p>
+
+                    <p>
+                        <strong>Reliure :</strong>
+                        À préciser
+                    </p>
+
+                </div>
+
+                <p class="prix">
+                    Prix du livre : 25 €
+                </p>
+
+                <p class="livraison">
+                    Expédition proposée en France par Colissimo Point Retrait.
+                    Les frais de livraison seront ajoutés à la commande.
+                </p>
+
+                <a
+                    href="commander.html"
+                    class="bouton-commander"
+                >
+                    Commander le livre
+                </a>
+
+            </div>
+
+        </div>
+
+        <a class="retour" href="index.html">
+            ← Revenir aux enregistrements
+        </a>
+
+    </main>
+
+</body>
+
+</html>
