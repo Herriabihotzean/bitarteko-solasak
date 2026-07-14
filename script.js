@@ -29,13 +29,14 @@ conversations.forEach(function (conversation, index) {
 
     } else {
 
-        bouton.innerHTML =
-            "<span>" +
-            "Dialogue " +
-            conversation.numero +
-            " – " +
-            conversation.titre +
-            "</span>";
+        const numero = String(conversation.numero).padStart(2,"0");
+
+            bouton.innerHTML =
+                "<span>" +
+                numero +
+                " – " +
+                conversation.titre +
+                "</span>";
     }
 
     bouton.addEventListener("click", function () {
@@ -70,11 +71,12 @@ function lireConversation(index) {
 
     } else {
 
-        titreEnCours.textContent =
-            "Dialogue " +
-            conversation.numero +
-            " – " +
-            conversation.titre;
+        const numero = String(conversation.numero).padStart(2,"0");
+
+            titreEnCours.textContent =
+                numero +
+                " – " +
+                conversation.titre;
 
         titreEnCours.classList.remove("avant-propos-en-cours");
     }
