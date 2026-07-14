@@ -44,9 +44,7 @@
             background-color: rgba(20, 55, 32, 0.94);
             border-radius: 14px;
 
-            box-shadow:
-                0 6px 22px
-                rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
         }
 
         h1 {
@@ -57,8 +55,8 @@
 
         .sous-titre {
             margin: 6px 0 28px;
-            text-align: center;
 
+            text-align: center;
             font-size: 1rem;
             font-weight: bold;
             letter-spacing: 0.13em;
@@ -76,13 +74,10 @@
             margin: 0 0 22px;
             padding: 20px;
 
-            border: 1px solid
-                rgba(255, 255, 255, 0.55);
-
+            border: 1px solid rgba(255, 255, 255, 0.55);
             border-radius: 10px;
 
-            background-color:
-                rgba(255, 255, 255, 0.07);
+            background-color: rgba(255, 255, 255, 0.07);
         }
 
         legend {
@@ -124,25 +119,19 @@
             background-color: white;
             color: #222222;
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 1rem;
         }
 
         textarea {
-            min-height: 80px;
+            min-height: 82px;
             resize: vertical;
         }
 
         input:focus,
         select:focus,
         textarea:focus {
-            outline: 3px solid
-                rgba(255, 233, 168, 0.45);
-
+            outline: 3px solid rgba(255, 233, 168, 0.45);
             border-color: #ffe9a8;
         }
 
@@ -153,7 +142,7 @@
         .choix-civilite {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 22px;
         }
 
         .choix-civilite label {
@@ -169,14 +158,30 @@
             width: auto;
         }
 
+        .mode-livraison {
+            margin: 0;
+            padding: 12px;
+
+            border: 1px solid rgba(255, 255, 255, 0.42);
+            border-radius: 7px;
+
+            background-color: rgba(0, 0, 0, 0.2);
+            line-height: 1.45;
+        }
+
+        .precision {
+            margin: 7px 0 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            opacity: 0.88;
+        }
+
         .resume {
             margin: 0 0 22px;
             padding: 18px;
 
             border-radius: 10px;
-
-            background-color:
-                rgba(0, 0, 0, 0.22);
+            background-color: rgba(0, 0, 0, 0.22);
 
             line-height: 1.55;
         }
@@ -191,6 +196,7 @@
         }
 
         #total {
+            margin-top: 12px;
             font-size: 1.25rem;
             font-weight: bold;
         }
@@ -225,11 +231,7 @@
             background-color: #f6f3ea;
             color: rgb(20, 55, 32);
 
-            font-family:
-                Georgia,
-                "Times New Roman",
-                serif;
-
+            font-family: Georgia, "Times New Roman", serif;
             font-size: 1.05rem;
             font-weight: bold;
 
@@ -253,20 +255,25 @@
             font-weight: bold;
         }
 
-        .retour {
-            display: block;
-            margin-top: 25px;
-
-            color: white;
-            text-align: center;
-        }
-
         .petit-texte {
             margin-top: 20px;
 
             font-size: 0.84rem;
             line-height: 1.45;
             opacity: 0.88;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+
+            margin-top: 26px;
+        }
+
+        .navigation a {
+            color: white;
         }
 
         @media (max-width: 650px) {
@@ -311,9 +318,8 @@
             </p>
 
             <p>
-                Après validation, vous serez dirigé vers le paiement
-                sécurisé. Le livre ne sera expédié qu’après vérification
-                du paiement.
+                L’expédition est proposée uniquement en France,
+                par Colissimo Point Retrait.
             </p>
         </div>
 
@@ -329,6 +335,7 @@
                     </label>
 
                     <div class="choix-civilite">
+
                         <label>
                             <input
                                 type="radio"
@@ -348,6 +355,7 @@
                             >
                             Mme
                         </label>
+
                     </div>
                 </div>
 
@@ -387,7 +395,7 @@
             </fieldset>
 
             <fieldset>
-                <legend>Adresse de livraison</legend>
+                <legend>Adresse personnelle</legend>
 
                 <div class="champ">
                     <label for="adresse1">
@@ -414,7 +422,7 @@
                         type="text"
                         id="adresse2"
                         name="adresse2"
-                        placeholder="Bâtiment, étage, lieu-dit…"
+                        placeholder="Bâtiment, appartement, lieu-dit…"
                         autocomplete="address-line2"
                     >
                 </div>
@@ -431,7 +439,11 @@
                             type="text"
                             id="codePostal"
                             name="codePostal"
+                            inputmode="numeric"
                             autocomplete="postal-code"
+                            pattern="[0-9]{5}"
+                            maxlength="5"
+                            placeholder="64100"
                             required
                         >
                     </div>
@@ -453,47 +465,13 @@
 
                 </div>
 
-                <div class="champ">
-                    <label for="pays">
-                        Pays
-                        <span class="obligatoire">*</span>
-                    </label>
+                <input
+                    type="hidden"
+                    id="pays"
+                    name="pays"
+                    value="France"
+                >
 
-                    <select
-                        id="pays"
-                        name="pays"
-                        autocomplete="country-name"
-                        required
-                    >
-                        <option value="">
-                            Sélectionnez un pays
-                        </option>
-
-                        <option value="France">
-                            France
-                        </option>
-
-                        <option value="Espagne">
-                            Espagne
-                        </option>
-
-                        <option value="Belgique">
-                            Belgique
-                        </option>
-
-                        <option value="Luxembourg">
-                            Luxembourg
-                        </option>
-
-                        <option value="Suisse">
-                            Suisse
-                        </option>
-
-                        <option value="Autre">
-                            Autre pays
-                        </option>
-                    </select>
-                </div>
             </fieldset>
 
             <fieldset>
@@ -517,6 +495,7 @@
                 <div class="champ">
                     <label for="telephone">
                         Téléphone
+                        <span class="obligatoire">*</span>
                     </label>
 
                     <input
@@ -524,8 +503,90 @@
                         id="telephone"
                         name="telephone"
                         autocomplete="tel"
+                        required
+                    >
+
+                    <p class="precision">
+                        Le numéro de téléphone est nécessaire pour être
+                        averti de l’arrivée du colis au point de retrait.
+                    </p>
+                </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Point de retrait</legend>
+
+                <div class="champ">
+                    <label for="pointRelaisNom">
+                        Nom du point de retrait choisi
+                        <span class="obligatoire">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pointRelaisNom"
+                        name="pointRelaisNom"
+                        placeholder="Bureau de poste, commerce ou consigne"
+                        required
                     >
                 </div>
+
+                <div class="champ">
+                    <label for="pointRelaisAdresse">
+                        Adresse du point de retrait
+                        <span class="obligatoire">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="pointRelaisAdresse"
+                        name="pointRelaisAdresse"
+                        placeholder="Adresse complète du point de retrait"
+                        required
+                    >
+                </div>
+
+                <div class="ligne">
+
+                    <div class="champ">
+                        <label for="pointRelaisCodePostal">
+                            Code postal
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="pointRelaisCodePostal"
+                            name="pointRelaisCodePostal"
+                            inputmode="numeric"
+                            pattern="[0-9]{5}"
+                            maxlength="5"
+                            required
+                        >
+                    </div>
+
+                    <div class="champ">
+                        <label for="pointRelaisVille">
+                            Ville
+                            <span class="obligatoire">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="pointRelaisVille"
+                            name="pointRelaisVille"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <p class="precision">
+                    Dans une version ultérieure, le choix du point de retrait
+                    pourra être relié à un service de recherche automatique.
+                </p>
+
             </fieldset>
 
             <fieldset>
@@ -553,41 +614,20 @@
                     </div>
 
                     <div class="champ">
-                        <label for="livraison">
+                        <label>
                             Mode de livraison
-                            <span class="obligatoire">*</span>
                         </label>
 
-                        <select
+                        <p class="mode-livraison">
+                            Colissimo Point Retrait — France
+                        </p>
+
+                        <input
+                            type="hidden"
                             id="livraison"
                             name="livraison"
-                            required
+                            value="Colissimo Point Retrait France"
                         >
-                            <option value="">
-                                Choisissez
-                            </option>
-
-                            <option
-                                value="Retrait sur place"
-                                data-prix="0"
-                            >
-                                Retrait sur place — 0 €
-                            </option>
-
-                            <option
-                                value="Livraison France"
-                                data-prix="7"
-                            >
-                                Livraison en France — 7 €
-                            </option>
-
-                            <option
-                                value="Livraison Europe"
-                                data-prix="14"
-                            >
-                                Livraison en Europe — 14 €
-                            </option>
-                        </select>
                     </div>
 
                 </div>
@@ -600,32 +640,42 @@
                     <textarea
                         id="remarques"
                         name="remarques"
-                        placeholder="Informations utiles pour la livraison…"
+                        placeholder="Informations utiles pour la commande…"
                     ></textarea>
                 </div>
+
             </fieldset>
 
             <div class="resume">
+
                 <h2>Récapitulatif</h2>
 
                 <p>
                     Prix d’un livre :
                     <strong>
-                        <span id="prix-unitaire">25</span> €
+                        <span id="prix-unitaire">25,00</span> €
                     </strong>
                 </p>
 
                 <p>
-                    Frais de livraison :
+                    Quantité :
                     <strong>
-                        <span id="prix-livraison">7</span> €
+                        <span id="quantite-affichee">1</span>
+                    </strong>
+                </p>
+
+                <p>
+                    Colissimo Point Retrait :
+                    <strong>
+                        <span id="prix-livraison">7,50</span> €
                     </strong>
                 </p>
 
                 <p id="total">
                     Total :
-                    <span id="prix-total">32</span> €
+                    <span id="prix-total">32,50</span> €
                 </p>
+
             </div>
 
             <div class="consentement">
@@ -639,7 +689,7 @@
 
                 <label for="accord">
                     J’accepte que les informations saisies soient utilisées
-                    uniquement pour traiter et expédier cette commande.
+                    uniquement pour traiter, payer et expédier cette commande.
                 </label>
 
             </div>
@@ -658,20 +708,39 @@
 
         <p class="petit-texte">
             Aucune donnée bancaire n’est recueillie par cette page.
-            Le paiement sera effectué ultérieurement sur le site sécurisé
+            Le paiement sera ensuite effectué sur le site sécurisé
             du prestataire de paiement.
         </p>
 
-        <a class="retour" href="index.html">
-            ← Revenir aux enregistrements
-        </a>
+        <nav class="navigation">
+            <a href="livre.html">
+                ← Revenir à la présentation du livre
+            </a>
+
+            <a href="index.html">
+                Revenir aux enregistrements
+            </a>
+        </nav>
 
     </main>
 
     <script>
         "use strict";
 
+        /*
+            MODIFIEZ CES DEUX MONTANTS SI NÉCESSAIRE.
+        */
+
         const PRIX_LIVRE = 25;
+        const FRAIS_LIVRAISON = 7.50;
+
+        /*
+            Cette adresse sera remplacée plus tard par l’adresse
+            du programme Google Apps Script.
+        */
+
+        const URL_APPS_SCRIPT = "";
+
 
         const formulaire =
             document.getElementById("formulaire-commande");
@@ -679,8 +748,11 @@
         const quantite =
             document.getElementById("quantite");
 
-        const livraison =
-            document.getElementById("livraison");
+        const prixUnitaire =
+            document.getElementById("prix-unitaire");
+
+        const quantiteAffichee =
+            document.getElementById("quantite-affichee");
 
         const prixLivraison =
             document.getElementById("prix-livraison");
@@ -695,24 +767,38 @@
             document.getElementById("message-formulaire");
 
 
+        function formaterPrix(montant) {
+            return montant.toLocaleString(
+                "fr-FR",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
+        }
+
+
         function calculerTotal() {
             const nombreLivres =
                 Number(quantite.value);
 
-            const optionChoisie =
-                livraison.options[livraison.selectedIndex];
-
-            const frais =
-                Number(optionChoisie.dataset.prix || 0);
+            const totalLivres =
+                PRIX_LIVRE * nombreLivres;
 
             const total =
-                (PRIX_LIVRE * nombreLivres) + frais;
+                totalLivres + FRAIS_LIVRAISON;
+
+            prixUnitaire.textContent =
+                formaterPrix(PRIX_LIVRE);
+
+            quantiteAffichee.textContent =
+                nombreLivres;
 
             prixLivraison.textContent =
-                frais.toFixed(2).replace(".00", "");
+                formaterPrix(FRAIS_LIVRAISON);
 
             prixTotal.textContent =
-                total.toFixed(2).replace(".00", "");
+                formaterPrix(total);
         }
 
 
@@ -721,15 +807,10 @@
             calculerTotal
         );
 
-        livraison.addEventListener(
-            "change",
-            calculerTotal
-        );
-
 
         formulaire.addEventListener(
             "submit",
-            function (evenement) {
+            async function (evenement) {
                 evenement.preventDefault();
 
                 if (!formulaire.checkValidity()) {
@@ -737,20 +818,86 @@
                     return;
                 }
 
-                boutonCommande.disabled = true;
-
-                messageFormulaire.textContent =
-                    "Le formulaire est prêt. " +
-                    "Il reste à le relier au service d’envoi.";
-
                 /*
-                    À l’étape suivante, ce bloc sera remplacé
-                    par l’envoi vers Google Apps Script.
+                    Tant que Google Apps Script n’est pas configuré,
+                    aucune donnée n’est envoyée.
                 */
 
-                setTimeout(function () {
+                if (URL_APPS_SCRIPT === "") {
+                    messageFormulaire.textContent =
+                        "Le formulaire est correctement rempli. " +
+                        "Il reste maintenant à le relier au service " +
+                        "qui créera le PDF et enverra la commande.";
+
+                    return;
+                }
+
+                boutonCommande.disabled = true;
+                boutonCommande.textContent = "Envoi en cours…";
+
+                messageFormulaire.textContent =
+                    "Enregistrement de votre commande…";
+
+                try {
+                    const donnees =
+                        new FormData(formulaire);
+
+                    donnees.append(
+                        "prixLivre",
+                        PRIX_LIVRE.toFixed(2)
+                    );
+
+                    donnees.append(
+                        "fraisLivraison",
+                        FRAIS_LIVRAISON.toFixed(2)
+                    );
+
+                    const nombreLivres =
+                        Number(quantite.value);
+
+                    const total =
+                        (PRIX_LIVRE * nombreLivres) +
+                        FRAIS_LIVRAISON;
+
+                    donnees.append(
+                        "total",
+                        total.toFixed(2)
+                    );
+
+                    const reponse =
+                        await fetch(
+                            URL_APPS_SCRIPT,
+                            {
+                                method: "POST",
+                                body: donnees
+                            }
+                        );
+
+                    if (!reponse.ok) {
+                        throw new Error(
+                            "Le service a refusé la commande."
+                        );
+                    }
+
+                    messageFormulaire.textContent =
+                        "Votre commande a bien été enregistrée.";
+
+                    /*
+                        La redirection vers PayPal sera ajoutée ici
+                        lors de l’étape consacrée au paiement.
+                    */
+
+                } catch (erreur) {
+                    console.error(erreur);
+
+                    messageFormulaire.textContent =
+                        "La commande n’a pas pu être envoyée. " +
+                        "Veuillez réessayer.";
+                } finally {
                     boutonCommande.disabled = false;
-                }, 1200);
+                    boutonCommande.textContent =
+                        "Enregistrer la commande";
+                }
             }
         );
 
