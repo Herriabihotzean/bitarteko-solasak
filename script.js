@@ -20,9 +20,11 @@ conversations.forEach(function (conversation, index) {
 
     if (conversation.numero === 0) {
 
+        bouton.classList.add("avant-propos");
+
         bouton.innerHTML =
-           "<span>" +
-            conversation.titre.toUpperCase() +
+            "<span>" +
+            conversation.titre +
             "</span>";
 
     } else {
@@ -34,7 +36,6 @@ conversations.forEach(function (conversation, index) {
             " – " +
             conversation.titre +
             "</span>";
-
     }
 
     bouton.addEventListener("click", function () {
@@ -63,9 +64,9 @@ function lireConversation(index) {
     lecteur.load();
 
     if (conversation.numero === 0) {
-        
-        titreEnCours.textContent =
-            "AVANT-PROPOS";
+
+        titreEnCours.textContent = "AVANT-PROPOS";
+        titreEnCours.classList.add("avant-propos-en-cours");
 
     } else {
 
@@ -75,6 +76,7 @@ function lireConversation(index) {
             " – " +
             conversation.titre;
 
+        titreEnCours.classList.remove("avant-propos-en-cours");
     }
 
     actualiserBoutonActif();
