@@ -53,11 +53,20 @@ function lireConversation(index) {
     lecteur.src = conversation.audio;
     lecteur.load();
 
-    titreEnCours.textContent =
-        "Dialogue " +
-        conversation.numero +
-        " — " +
-        conversation.titre;
+    if (conversation.numero === 0) {
+        
+        titreEnCours.textContent =
+            "AVANT-PROPOS";
+
+    } else {
+
+        titreEnCours.textContent =
+            "Dialogue " +
+            conversation.numero +
+            " – " +
+            conversation.titre;
+
+    }
 
     actualiserBoutonActif();
 
