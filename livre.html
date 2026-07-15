@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
 
@@ -9,7 +8,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Le Manuel de la conversation, 1861</title>
+    <title>Le livre — Manuel de la conversation</title>
 
     <style>
         * {
@@ -18,159 +17,163 @@
 
         body {
             margin: 0;
-            min-height: 100vh;
-            padding: 30px 15px;
-
             font-family: Georgia, "Times New Roman", serif;
-            color: white;
-
-            background-image:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.42),
-                    rgba(0, 0, 0, 0.42)
-                ),
-                url("Un dimanche d'été à Ascain.jpeg");
-
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-
-        main {
-            width: min(900px, 96%);
-            margin: 0 auto;
-            padding: 32px;
-
-            background-color: rgba(20, 55, 32, 0.94);
-            border-radius: 14px;
-
-            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            margin: 0;
-            text-align: center;
-            font-size: 2.1rem;
-        }
-
-        .sous-titre {
-            margin: 7px 0 30px;
-
-            text-align: center;
-            font-weight: bold;
-            letter-spacing: 0.13em;
-        }
-
-        .presentation-livre {
-            display: grid;
-            grid-template-columns: minmax(220px, 340px) 1fr;
-            align-items: center;
-            gap: 38px;
-        }
-
-        .image-livre {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .description {
-            font-size: 1.05rem;
+            background: #f5f0e8;
+            color: #29231f;
             line-height: 1.65;
         }
 
-        .description h2 {
-            margin-top: 0;
-            font-size: 1.45rem;
-        }
-
-        .caracteristiques {
-            margin: 24px 0;
-            padding: 18px 20px;
-
-            border: 1px solid rgba(255, 255, 255, 0.45);
-            border-radius: 9px;
-
-            background-color: rgba(255, 255, 255, 0.07);
-        }
-
-        .caracteristiques p {
-            margin: 7px 0;
-        }
-
-        .prix {
-            margin: 25px 0 18px;
-
-            font-size: 1.45rem;
-            font-weight: bold;
-        }
-
-        .livraison {
-            margin: 0 0 23px;
-            font-size: 0.95rem;
-        }
-
-        .bouton-commander {
-            display: inline-block;
-            padding: 13px 24px;
-
-            border-radius: 8px;
-
-            background-color: #f6f3ea;
-            color: rgb(20, 55, 32);
-
-            font-size: 1.05rem;
-            font-weight: bold;
-            text-decoration: none;
-
-            transition:
-                background-color 0.2s,
-                transform 0.2s;
-        }
-
-        .bouton-commander:hover {
-            background-color: #ffe9a8;
-            transform: translateY(-2px);
-        }
-
-        .retour {
-            display: block;
-            margin-top: 32px;
-
+        header {
+            padding: 70px 20px;
+            background: #730000;
             color: white;
             text-align: center;
         }
 
-        @media (max-width: 700px) {
-            body {
-                padding: 12px 6px;
-            }
+        header h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2rem, 6vw, 4rem);
+        }
 
-            main {
-                width: 98%;
-                padding: 22px 15px;
-            }
+        header p {
+            margin: 0;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
 
-            h1 {
-                font-size: 1.55rem;
-            }
+        main {
+            width: min(1050px, calc(100% - 28px));
+            margin: 0 auto;
+            padding: 50px 0 80px;
+        }
 
-            .presentation-livre {
+        .presentation {
+            max-width: 800px;
+            margin: 0 auto 55px;
+            font-size: 1.1rem;
+        }
+
+        .presentation h2 {
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        .galerie {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        figure {
+            margin: 0;
+            padding: 14px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 7px 23px rgba(0, 0, 0, 0.15);
+        }
+
+        figure:first-child {
+            grid-column: 1 / -1;
+            width: min(600px, 100%);
+            margin: 0 auto;
+        }
+
+        figure:last-child {
+            grid-column: 1 / -1;
+            width: min(750px, 100%);
+            margin: 0 auto;
+        }
+
+        figure img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        figcaption {
+            padding: 12px 5px 3px;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        .informations {
+            max-width: 760px;
+            margin: 60px auto 0;
+            padding: 30px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 7px 23px rgba(0, 0, 0, 0.12);
+        }
+
+        .informations h2 {
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .informations p {
+            margin: 9px 0;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 760px;
+            margin: 35px auto 0;
+        }
+
+        .bouton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 62px;
+            padding: 13px 20px;
+            border: 2px solid #730000;
+            border-radius: 7px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .bouton-principal {
+            background: #730000;
+            color: white;
+        }
+
+        .bouton-secondaire {
+            background: white;
+            color: #730000;
+        }
+
+        .bouton-retour {
+            grid-column: 1 / -1;
+            border-color: #444;
+            background: transparent;
+            color: #333;
+        }
+
+        .bouton:hover,
+        .bouton:focus-visible {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 680px) {
+            .galerie,
+            .actions {
                 grid-template-columns: 1fr;
-                gap: 22px;
             }
 
-            .image-livre {
-                width: min(320px, 90%);
-                margin: 0 auto;
+            figure,
+            figure:first-child,
+            figure:last-child {
+                grid-column: auto;
+                width: 100%;
             }
 
-            .description {
-                text-align: center;
-            }
-
-            .caracteristiques {
-                text-align: left;
+            .bouton-retour {
+                grid-column: auto;
             }
         }
     </style>
@@ -178,95 +181,121 @@
 
 <body>
 
+    <header>
+        <h1>Manuel de la conversation</h1>
+        <p>Bitarteko solasak</p>
+    </header>
+
     <main>
+        <section class="presentation">
+            <h2>Découvrir le livre</h2>
 
-        <h1>Manuel de la conversation, 1861</h1>
+            <p>
+                Le livre rassemble les dialogues accompagnant les
+                enregistrements ainsi que différents outils destinés
+                à faciliter la compréhension, la consultation et
+                l’apprentissage.
+            </p>
 
-        <p class="sous-titre">
-            BITARTEKO SOLASAK eta LETRAK
-        </p>
+            <p>
+                Les photographies ci-dessous donnent un aperçu de la
+                couverture, de la présentation des verbes, des pages
+                de conversations et de la partie consacrée aux lettres.
+            </p>
+        </section>
 
-        <div class="presentation-livre">
+        <section class="galerie" aria-label="Photographies du livre">
 
-            <div>
+            <figure>
                 <img
-                    src="livre.png"
-                    class="image-livre"
+                    src="images/couverture.jpg"
                     alt="Couverture du Manuel de la conversation"
+                    loading="lazy"
                 >
-            </div>
+                <figcaption>La couverture du livre</figcaption>
+            </figure>
 
-            <div class="description">
-
-                <h2>Présentation de l’ouvrage</h2>
-
-                <p>
-                    Le <em>Manuel de la conversation</em>, publié en 1861,
-                    rassemble des dialogues, des modèles de lettres et des
-                    expressions destinés à faciliter la conversation en
-                    français et en basque.
-                </p>
-
-                <p>
-                    Cette édition permet de retrouver l’ensemble du texte
-                    accompagné des enregistrements disponibles sur le site.
-                </p>
-
-                <div class="caracteristiques">
-
-                    <p>
-                        <strong>Titre :</strong>
-                        Manuel de la conversation
-                    </p>
-
-                    <p>
-                        <strong>Année de l’ouvrage original :</strong>
-                        1861
-                    </p>
-
-                    <p>
-                        <strong>Format :</strong>
-                        À préciser
-                    </p>
-
-                    <p>
-                        <strong>Nombre de pages :</strong>
-                        À préciser
-                    </p>
-
-                    <p>
-                        <strong>Reliure :</strong>
-                        À préciser
-                    </p>
-
-                </div>
-
-                <p class="prix">
-                    Prix du livre : 25 €
-                </p>
-
-                <p class="livraison">
-                    Expédition proposée en France par Colissimo Point Retrait.
-                    Les frais de livraison seront ajoutés à la commande.
-                </p>
-
-                <a
-                    href="commander.html"
-                    class="bouton-commander"
+            <figure>
+                <img
+                    src="images/verbes.jpg"
+                    alt="Exemple de la partie consacrée aux verbes"
+                    loading="lazy"
                 >
-                    Commander le livre
-                </a>
+                <figcaption>La partie consacrée aux verbes</figcaption>
+            </figure>
 
-            </div>
+            <figure>
+                <img
+                    src="images/conversations-1.jpg"
+                    alt="Première photographie des conversations"
+                    loading="lazy"
+                >
+                <figcaption>Présentation des conversations</figcaption>
+            </figure>
 
-        </div>
+            <figure>
+                <img
+                    src="images/conversations-2.jpg"
+                    alt="Seconde photographie des conversations"
+                    loading="lazy"
+                >
+                <figcaption>Autre aperçu des conversations</figcaption>
+            </figure>
 
-        <a class="retour" href="index.html">
-            ← Revenir aux enregistrements
-        </a>
+            <figure>
+                <img
+                    src="images/lettres.jpg"
+                    alt="Exemple de la partie consacrée aux lettres"
+                    loading="lazy"
+                >
+                <figcaption>La partie consacrée aux lettres</figcaption>
+            </figure>
 
+        </section>
+
+        <section class="informations">
+            <h2>Commande et expédition</h2>
+
+            <p>
+                <strong>Prix du livre :</strong>
+                à compléter
+            </p>
+
+            <p>
+                <strong>Expédition :</strong>
+                en France via Mondial Relay
+            </p>
+
+            <p>
+                Le point relais est choisi au moment de la commande.
+                Le paiement peut être effectué de manière sécurisée
+                par PayPal.
+            </p>
+        </section>
+
+        <nav class="actions" aria-label="Actions relatives au livre">
+            <a
+                class="bouton bouton-principal"
+                href="commander.html"
+            >
+                Commander maintenant
+            </a>
+
+            <a
+                class="bouton bouton-secondaire"
+                href="contact.html"
+            >
+                Nous contacter
+            </a>
+
+            <a
+                class="bouton bouton-retour"
+                href="presentation.html"
+            >
+                ← Retour à la présentation
+            </a>
+        </nav>
     </main>
 
 </body>
-
 </html>
