@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
 
@@ -18,92 +17,44 @@
 
         body {
             margin: 0;
-            min-height: 100vh;
-            padding: 30px 15px;
-
             font-family: Georgia, "Times New Roman", serif;
-            color: white;
-
-            background-image:
-                linear-gradient(
-                    rgba(0, 0, 0, 0.45),
-                    rgba(0, 0, 0, 0.45)
-                ),
-                url("Un dimanche d'été à Ascain.jpeg");
-
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: #f5f0e8;
+            color: #29231f;
+            line-height: 1.5;
         }
 
         main {
-            width: min(760px, 96%);
-            margin: 0 auto;
-            padding: 30px;
-
-            background-color: rgba(20, 55, 32, 0.94);
-            border-radius: 14px;
-
-            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
+            width: min(850px, calc(100% - 26px));
+            margin: 35px auto;
         }
 
         h1 {
-            margin: 0;
+            color: #730000;
             text-align: center;
-            font-size: 2rem;
         }
 
-        .sous-titre {
-            margin: 6px 0 28px;
-
-            text-align: center;
-            font-size: 1rem;
-            font-weight: bold;
-            letter-spacing: 0.13em;
+        .encadre {
+            margin-bottom: 22px;
+            padding: clamp(22px, 5vw, 35px);
+            border-radius: 9px;
+            background: white;
+            box-shadow: 0 7px 25px rgba(0, 0, 0, 0.12);
         }
 
-        .introduction {
-            max-width: 620px;
-            margin: 0 auto 28px;
-
-            text-align: center;
-            line-height: 1.55;
+        h2 {
+            margin-top: 0;
+            color: #730000;
         }
 
-        fieldset {
-            margin: 0 0 22px;
-            padding: 20px;
-
-            border: 1px solid rgba(255, 255, 255, 0.55);
-            border-radius: 10px;
-
-            background-color: rgba(255, 255, 255, 0.07);
-        }
-
-        legend {
-            padding: 0 10px;
-            font-weight: bold;
-        }
-
-        .ligne {
+        .grille {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-        }
-
-        .champ {
-            margin-bottom: 16px;
-        }
-
-        .champ:last-child {
-            margin-bottom: 0;
+            gap: 18px;
         }
 
         label {
             display: block;
             margin-bottom: 6px;
-
-            font-size: 0.95rem;
             font-weight: bold;
         }
 
@@ -111,192 +62,114 @@
         select,
         textarea {
             width: 100%;
-            padding: 11px 12px;
-
-            border: 1px solid #cccccc;
-            border-radius: 6px;
-
-            background-color: white;
-            color: #222222;
-
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 1rem;
+            min-height: 47px;
+            padding: 10px;
+            border: 1px solid #8b8179;
+            border-radius: 5px;
+            background: white;
+            font: inherit;
         }
 
         textarea {
-            min-height: 82px;
+            min-height: 110px;
             resize: vertical;
         }
 
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: 3px solid rgba(255, 233, 168, 0.45);
-            border-color: #ffe9a8;
+        .champ-large {
+            grid-column: 1 / -1;
         }
 
-        .obligatoire {
-            color: #ffe9a8;
-        }
-
-        .choix-civilite {
+        .resume-ligne {
             display: flex;
-            flex-wrap: wrap;
-            gap: 22px;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 8px 0;
+            border-bottom: 1px solid #ddd;
         }
 
-        .choix-civilite label {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-
-            margin: 0;
-            font-weight: normal;
-        }
-
-        .choix-civilite input {
-            width: auto;
-        }
-
-        .mode-livraison {
-            margin: 0;
-            padding: 12px;
-
-            border: 1px solid rgba(255, 255, 255, 0.42);
-            border-radius: 7px;
-
-            background-color: rgba(0, 0, 0, 0.2);
-            line-height: 1.45;
-        }
-
-        .precision {
-            margin: 7px 0 0;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            opacity: 0.88;
-        }
-
-        .resume {
-            margin: 0 0 22px;
-            padding: 18px;
-
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.22);
-
-            line-height: 1.55;
-        }
-
-        .resume h2 {
-            margin: 0 0 12px;
-            font-size: 1.2rem;
-        }
-
-        .resume p {
-            margin: 5px 0;
-        }
-
-        #total {
-            margin-top: 12px;
+        .resume-total {
+            margin-top: 10px;
             font-size: 1.25rem;
             font-weight: bold;
         }
 
-        .consentement {
+        .case {
             display: flex;
             align-items: flex-start;
             gap: 10px;
-
-            margin: 22px 0;
-            line-height: 1.4;
+            margin-top: 20px;
         }
 
-        .consentement input {
+        .case input {
             width: auto;
-            margin-top: 3px;
+            min-height: auto;
+            margin-top: 5px;
         }
 
-        .consentement label {
-            margin: 0;
-            font-weight: normal;
+        .avertissement {
+            padding: 16px;
+            border-left: 5px solid #b17a00;
+            background: #fff7dd;
         }
 
-        .bouton-commande {
-            display: block;
+        #zonePointRelais {
+            margin-top: 20px;
+        }
+
+        #widgetMondialRelay {
+            min-height: 100px;
+            padding: 18px;
+            border: 1px dashed #8b8179;
+            text-align: center;
+        }
+
+        #pointRelaisChoisi {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0eee9;
+        }
+
+        #zonePaypal {
+            min-height: 80px;
+            margin-top: 20px;
+        }
+
+        .bouton {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            padding: 14px 20px;
-
-            border: 0;
-            border-radius: 8px;
-
-            background-color: #f6f3ea;
-            color: rgb(20, 55, 32);
-
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: 1.05rem;
+            min-height: 55px;
+            margin-top: 14px;
+            padding: 12px 18px;
+            border: 2px solid #730000;
+            border-radius: 6px;
+            background: #730000;
+            color: white;
+            font: inherit;
             font-weight: bold;
-
+            text-decoration: none;
             cursor: pointer;
         }
 
-        .bouton-commande:hover {
-            background-color: #ffe9a8;
+        .bouton-secondaire {
+            background: white;
+            color: #730000;
         }
 
-        .bouton-commande:disabled {
-            opacity: 0.65;
-            cursor: wait;
-        }
-
-        #message-formulaire {
+        #messageCommande {
             min-height: 24px;
-            margin: 16px 0 0;
-
-            text-align: center;
+            margin-top: 18px;
             font-weight: bold;
         }
 
-        .petit-texte {
-            margin-top: 20px;
-
-            font-size: 0.84rem;
-            line-height: 1.45;
-            opacity: 0.88;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-
-            margin-top: 26px;
-        }
-
-        .navigation a {
-            color: white;
-        }
-
         @media (max-width: 650px) {
-            body {
-                padding: 12px 6px;
-            }
-
-            main {
-                width: 98%;
-                padding: 22px 14px;
-            }
-
-            h1 {
-                font-size: 1.55rem;
-            }
-
-            .ligne {
+            .grille {
                 grid-template-columns: 1fr;
-                gap: 0;
             }
 
-            fieldset {
-                padding: 16px 12px;
+            .champ-large {
+                grid-column: auto;
             }
         }
     </style>
@@ -305,606 +178,279 @@
 <body>
 
     <main>
+        <h1>Commander le Manuel de la conversation</h1>
 
-        <h1>Manuel de la conversation, 1861</h1>
+        <form id="formulaireCommande">
 
-        <p class="sous-titre">
-            BITARTEKO SOLASAK eta LETRAK
-        </p>
+            <section class="encadre">
+                <h2>1. Vos coordonnées</h2>
 
-        <div class="introduction">
-            <p>
-                Remplissez ce formulaire pour préparer votre commande.
-            </p>
-
-            <p>
-                L’expédition est proposée uniquement en France,
-                par Colissimo Point Retrait.
-            </p>
-        </div>
-
-        <form id="formulaire-commande">
-
-            <fieldset>
-                <legend>Destinataire</legend>
-
-                <div class="champ">
-                    <label>
-                        Civilité
-                        <span class="obligatoire">*</span>
-                    </label>
-
-                    <div class="choix-civilite">
-
-                        <label>
-                            <input
-                                type="radio"
-                                name="civilite"
-                                value="M."
-                                required
-                            >
-                            M.
-                        </label>
-
-                        <label>
-                            <input
-                                type="radio"
-                                name="civilite"
-                                value="Mme"
-                                required
-                            >
-                            Mme
-                        </label>
-
-                    </div>
-                </div>
-
-                <div class="ligne">
-
-                    <div class="champ">
-                        <label for="prenom">
-                            Prénom
-                            <span class="obligatoire">*</span>
-                        </label>
-
+                <div class="grille">
+                    <div>
+                        <label for="prenom">Prénom</label>
                         <input
-                            type="text"
                             id="prenom"
                             name="prenom"
+                            type="text"
                             autocomplete="given-name"
                             required
                         >
                     </div>
 
-                    <div class="champ">
-                        <label for="nom">
-                            Nom
-                            <span class="obligatoire">*</span>
-                        </label>
-
+                    <div>
+                        <label for="nom">Nom</label>
                         <input
-                            type="text"
                             id="nom"
                             name="nom"
+                            type="text"
                             autocomplete="family-name"
                             required
                         >
                     </div>
 
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <legend>Adresse personnelle</legend>
-
-                <div class="champ">
-                    <label for="adresse1">
-                        Numéro et nom de la voie
-                        <span class="obligatoire">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        id="adresse1"
-                        name="adresse1"
-                        placeholder="12 rue des Fougères"
-                        autocomplete="address-line1"
-                        required
-                    >
-                </div>
-
-                <div class="champ">
-                    <label for="adresse2">
-                        Complément d’adresse
-                    </label>
-
-                    <input
-                        type="text"
-                        id="adresse2"
-                        name="adresse2"
-                        placeholder="Bâtiment, appartement, lieu-dit…"
-                        autocomplete="address-line2"
-                    >
-                </div>
-
-                <div class="ligne">
-
-                    <div class="champ">
-                        <label for="codePostal">
-                            Code postal
-                            <span class="obligatoire">*</span>
-                        </label>
-
+                    <div>
+                        <label for="email">Adresse électronique</label>
                         <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label for="telephone">Téléphone</label>
+                        <input
+                            id="telephone"
+                            name="telephone"
+                            type="tel"
+                            autocomplete="tel"
+                            required
+                        >
+                    </div>
+
+                    <div class="champ-large">
+                        <label for="adresse">Adresse postale</label>
+                        <input
+                            id="adresse"
+                            name="adresse"
                             type="text"
+                            autocomplete="street-address"
+                            required
+                        >
+                    </div>
+
+                    <div>
+                        <label for="codePostal">Code postal</label>
+                        <input
                             id="codePostal"
                             name="codePostal"
+                            type="text"
                             inputmode="numeric"
                             autocomplete="postal-code"
                             pattern="[0-9]{5}"
                             maxlength="5"
-                            placeholder="64100"
                             required
                         >
                     </div>
 
-                    <div class="champ">
-                        <label for="ville">
-                            Ville
-                            <span class="obligatoire">*</span>
-                        </label>
-
+                    <div>
+                        <label for="ville">Ville</label>
                         <input
-                            type="text"
                             id="ville"
                             name="ville"
+                            type="text"
                             autocomplete="address-level2"
                             required
                         >
                     </div>
+                </div>
+            </section>
 
+            <section class="encadre">
+                <h2>2. Votre commande</h2>
+
+                <label for="quantite">Nombre d’exemplaires</label>
+
+                <select id="quantite" name="quantite">
+                    <option value="1">1 exemplaire</option>
+                    <option value="2">2 exemplaires</option>
+                    <option value="3">3 exemplaires</option>
+                    <option value="4">4 exemplaires</option>
+                    <option value="5">5 exemplaires</option>
+                </select>
+
+                <div class="resume-ligne">
+                    <span>Prix unitaire</span>
+                    <span id="prixUnitaireAffiche">25,00 €</span>
                 </div>
 
-                <input
-                    type="hidden"
-                    id="pays"
-                    name="pays"
-                    value="France"
-                >
-
-            </fieldset>
-
-            <fieldset>
-                <legend>Coordonnées</legend>
-
-                <div class="champ">
-                    <label for="email">
-                        Adresse électronique
-                        <span class="obligatoire">*</span>
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        autocomplete="email"
-                        required
-                    >
+                <div class="resume-ligne">
+                    <span>Expédition via Mondial Relay</span>
+                    <span id="livraisonAffiche">5,00 €</span>
                 </div>
 
-                <div class="champ">
-                    <label for="telephone">
-                        Téléphone
-                        <span class="obligatoire">*</span>
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="telephone"
-                        name="telephone"
-                        autocomplete="tel"
-                        required
-                    >
-
-                    <p class="precision">
-                        Le numéro de téléphone est nécessaire pour être
-                        averti de l’arrivée du colis au point de retrait.
-                    </p>
+                <div class="resume-ligne resume-total">
+                    <span>Total</span>
+                    <span id="totalAffiche">30,00 €</span>
                 </div>
+            </section>
 
-            </fieldset>
-
-            <fieldset>
-                <legend>Point de retrait</legend>
-
-                <div class="champ">
-                    <label for="pointRelaisNom">
-                        Nom du point de retrait choisi
-                        <span class="obligatoire">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        id="pointRelaisNom"
-                        name="pointRelaisNom"
-                        placeholder="Bureau de poste, commerce ou consigne"
-                        required
-                    >
-                </div>
-
-                <div class="champ">
-                    <label for="pointRelaisAdresse">
-                        Adresse du point de retrait
-                        <span class="obligatoire">*</span>
-                    </label>
-
-                    <input
-                        type="text"
-                        id="pointRelaisAdresse"
-                        name="pointRelaisAdresse"
-                        placeholder="Adresse complète du point de retrait"
-                        required
-                    >
-                </div>
-
-                <div class="ligne">
-
-                    <div class="champ">
-                        <label for="pointRelaisCodePostal">
-                            Code postal
-                            <span class="obligatoire">*</span>
-                        </label>
-
-                        <input
-                            type="text"
-                            id="pointRelaisCodePostal"
-                            name="pointRelaisCodePostal"
-                            inputmode="numeric"
-                            pattern="[0-9]{5}"
-                            maxlength="5"
-                            required
-                        >
-                    </div>
-
-                    <div class="champ">
-                        <label for="pointRelaisVille">
-                            Ville
-                            <span class="obligatoire">*</span>
-                        </label>
-
-                        <input
-                            type="text"
-                            id="pointRelaisVille"
-                            name="pointRelaisVille"
-                            required
-                        >
-                    </div>
-
-                </div>
-
-                <p class="precision">
-                    Dans une version ultérieure, le choix du point de retrait
-                    pourra être relié à un service de recherche automatique.
-                </p>
-
-            </fieldset>
-
-            <fieldset>
-                <legend>Commande</legend>
-
-                <div class="ligne">
-
-                    <div class="champ">
-                        <label for="quantite">
-                            Quantité
-                            <span class="obligatoire">*</span>
-                        </label>
-
-                        <select
-                            id="quantite"
-                            name="quantite"
-                            required
-                        >
-                            <option value="1">1 exemplaire</option>
-                            <option value="2">2 exemplaires</option>
-                            <option value="3">3 exemplaires</option>
-                            <option value="4">4 exemplaires</option>
-                            <option value="5">5 exemplaires</option>
-                        </select>
-                    </div>
-
-                    <div class="champ">
-                        <label>
-                            Mode de livraison
-                        </label>
-
-                        <p class="mode-livraison">
-                            Colissimo Point Retrait — France
-                        </p>
-
-                        <input
-                            type="hidden"
-                            id="livraison"
-                            name="livraison"
-                            value="Colissimo Point Retrait France"
-                        >
-                    </div>
-
-                </div>
-
-                <div class="champ">
-                    <label for="remarques">
-                        Remarques éventuelles
-                    </label>
-
-                    <textarea
-                        id="remarques"
-                        name="remarques"
-                        placeholder="Informations utiles pour la commande…"
-                    ></textarea>
-                </div>
-
-            </fieldset>
-
-            <div class="resume">
-
-                <h2>Récapitulatif</h2>
+            <section class="encadre">
+                <h2>3. Votre Point Relais</h2>
 
                 <p>
-                    Prix d’un livre :
-                    <strong>
-                        <span id="prix-unitaire">25,00</span> €
-                    </strong>
+                    Saisissez d’abord votre code postal, puis sélectionnez
+                    votre Point Relais.
                 </p>
 
-                <p>
-                    Quantité :
-                    <strong>
-                        <span id="quantite-affichee">1</span>
-                    </strong>
-                </p>
+                <div id="zonePointRelais">
+                    <div id="widgetMondialRelay">
+                        La carte Mondial Relay apparaîtra ici après
+                        l’ajout de votre code enseigne.
+                    </div>
 
-                <p>
-                    Colissimo Point Retrait :
-                    <strong>
-                        <span id="prix-livraison">7,50</span> €
-                    </strong>
-                </p>
+                    <input
+                        id="pointRelaisId"
+                        name="pointRelaisId"
+                        type="hidden"
+                    >
 
-                <p id="total">
-                    Total :
-                    <span id="prix-total">32,50</span> €
-                </p>
+                    <input
+                        id="pointRelaisDescription"
+                        name="pointRelaisDescription"
+                        type="hidden"
+                    >
 
-            </div>
+                    <div id="pointRelaisChoisi">
+                        Aucun Point Relais sélectionné.
+                    </div>
+                </div>
+            </section>
 
-            <div class="consentement">
+            <section class="encadre">
+                <h2>4. Informations complémentaires</h2>
 
-                <input
-                    type="checkbox"
-                    id="accord"
-                    name="accord"
-                    required
-                >
-
-                <label for="accord">
-                    J’accepte que les informations saisies soient utilisées
-                    uniquement pour traiter, payer et expédier cette commande.
+                <label for="remarque">
+                    Remarque concernant votre commande
                 </label>
 
-            </div>
+                <textarea
+                    id="remarque"
+                    name="remarque"
+                ></textarea>
 
-            <button
-                type="submit"
-                id="bouton-commande"
-                class="bouton-commande"
-            >
-                Enregistrer la commande
-            </button>
+                <label class="case">
+                    <input
+                        id="conditions"
+                        name="conditions"
+                        type="checkbox"
+                        required
+                    >
 
-            <p id="message-formulaire"></p>
+                    <span>
+                        Je confirme l’exactitude des informations fournies
+                        et j’accepte qu’elles soient utilisées pour traiter
+                        ma commande et son expédition.
+                    </span>
+                </label>
+            </section>
+
+            <section class="encadre">
+                <h2>5. Paiement sécurisé</h2>
+
+                <div class="avertissement">
+                    Le paiement ne doit être activé qu’après avoir remplacé
+                    les identifiants d’essai par vos propres identifiants
+                    PayPal et relié la commande à un système d’enregistrement
+                    sécurisé.
+                </div>
+
+                <div id="zonePaypal">
+                    Le bouton PayPal apparaîtra ici après configuration.
+                </div>
+
+                <div
+                    id="messageCommande"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+            </section>
 
         </form>
 
-        <p class="petit-texte">
-            Aucune donnée bancaire n’est recueillie par cette page.
-            Le paiement sera ensuite effectué sur le site sécurisé
-            du prestataire de paiement.
-        </p>
-
-        <nav class="navigation">
-            <a href="livre.html">
-                ← Revenir à la présentation du livre
-            </a>
-
-            <a href="index.html">
-                Revenir aux enregistrements
-            </a>
-        </nav>
-
+        <a class="bouton bouton-secondaire" href="livre.html">
+            ← Retour à la page du livre
+        </a>
     </main>
 
     <script>
-        "use strict";
-
         /*
-            MODIFIEZ CES DEUX MONTANTS SI NÉCESSAIRE.
-        */
-
-        const PRIX_LIVRE = 25;
-        const FRAIS_LIVRAISON = 7.50;
-
-        /*
-            Cette adresse sera remplacée plus tard par l’adresse
-            du programme Google Apps Script.
-        */
-
-        const URL_APPS_SCRIPT = "";
-
-
-        const formulaire =
-            document.getElementById("formulaire-commande");
+         * À MODIFIER :
+         */
+        const PRIX_LIVRE = 25.00;
+        const PRIX_LIVRAISON = 5.00;
 
         const quantite =
             document.getElementById("quantite");
 
-        const prixUnitaire =
-            document.getElementById("prix-unitaire");
+        const prixUnitaireAffiche =
+            document.getElementById("prixUnitaireAffiche");
 
-        const quantiteAffichee =
-            document.getElementById("quantite-affichee");
+        const livraisonAffiche =
+            document.getElementById("livraisonAffiche");
 
-        const prixLivraison =
-            document.getElementById("prix-livraison");
-
-        const prixTotal =
-            document.getElementById("prix-total");
-
-        const boutonCommande =
-            document.getElementById("bouton-commande");
-
-        const messageFormulaire =
-            document.getElementById("message-formulaire");
-
+        const totalAffiche =
+            document.getElementById("totalAffiche");
 
         function formaterPrix(montant) {
-            return montant.toLocaleString(
+            return new Intl.NumberFormat(
                 "fr-FR",
                 {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2
+                    style: "currency",
+                    currency: "EUR"
                 }
-            );
+            ).format(montant);
         }
-
 
         function calculerTotal() {
-            const nombreLivres =
-                Number(quantite.value);
-
-            const totalLivres =
-                PRIX_LIVRE * nombreLivres;
+            const nombre =
+                Number.parseInt(quantite.value, 10) || 1;
 
             const total =
-                totalLivres + FRAIS_LIVRAISON;
+                PRIX_LIVRE * nombre +
+                PRIX_LIVRAISON;
 
-            prixUnitaire.textContent =
+            prixUnitaireAffiche.textContent =
                 formaterPrix(PRIX_LIVRE);
 
-            quantiteAffichee.textContent =
-                nombreLivres;
+            livraisonAffiche.textContent =
+                formaterPrix(PRIX_LIVRAISON);
 
-            prixLivraison.textContent =
-                formaterPrix(FRAIS_LIVRAISON);
-
-            prixTotal.textContent =
+            totalAffiche.textContent =
                 formaterPrix(total);
-        }
 
+            return total;
+        }
 
         quantite.addEventListener(
             "change",
             calculerTotal
         );
 
-
-        formulaire.addEventListener(
-            "submit",
-            async function (evenement) {
-                evenement.preventDefault();
-
-                if (!formulaire.checkValidity()) {
-                    formulaire.reportValidity();
-                    return;
-                }
-
-                /*
-                    Tant que Google Apps Script n’est pas configuré,
-                    aucune donnée n’est envoyée.
-                */
-
-                if (URL_APPS_SCRIPT === "") {
-                    messageFormulaire.textContent =
-                        "Le formulaire est correctement rempli. " +
-                        "Il reste maintenant à le relier au service " +
-                        "qui créera le PDF et enverra la commande.";
-
-                    return;
-                }
-
-                boutonCommande.disabled = true;
-                boutonCommande.textContent = "Envoi en cours…";
-
-                messageFormulaire.textContent =
-                    "Enregistrement de votre commande…";
-
-                try {
-                    const donnees =
-                        new FormData(formulaire);
-
-                    donnees.append(
-                        "prixLivre",
-                        PRIX_LIVRE.toFixed(2)
-                    );
-
-                    donnees.append(
-                        "fraisLivraison",
-                        FRAIS_LIVRAISON.toFixed(2)
-                    );
-
-                    const nombreLivres =
-                        Number(quantite.value);
-
-                    const total =
-                        (PRIX_LIVRE * nombreLivres) +
-                        FRAIS_LIVRAISON;
-
-                    donnees.append(
-                        "total",
-                        total.toFixed(2)
-                    );
-
-                    const reponse =
-                        await fetch(
-                            URL_APPS_SCRIPT,
-                            {
-                                method: "POST",
-                                body: donnees
-                            }
-                        );
-
-                    if (!reponse.ok) {
-                        throw new Error(
-                            "Le service a refusé la commande."
-                        );
-                    }
-
-                    messageFormulaire.textContent =
-                        "Votre commande a bien été enregistrée.";
-
-                    /*
-                        La redirection vers PayPal sera ajoutée ici
-                        lors de l’étape consacrée au paiement.
-                    */
-
-                } catch (erreur) {
-                    console.error(erreur);
-
-                    messageFormulaire.textContent =
-                        "La commande n’a pas pu être envoyée. " +
-                        "Veuillez réessayer.";
-                } finally {
-                    boutonCommande.disabled = false;
-                    boutonCommande.textContent =
-                        "Enregistrer la commande";
-                }
-            }
-        );
-
-
         calculerTotal();
+
+        /*
+         * Le code du widget Mondial Relay sera ajouté ici
+         * lorsque vous aurez votre CODE ENSEIGNE.
+         *
+         * Les données choisies devront être placées dans :
+         *
+         * pointRelaisId
+         * pointRelaisDescription
+         */
     </script>
 
 </body>
-
 </html>
