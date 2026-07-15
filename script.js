@@ -1,162 +1,344 @@
 "use strict";
 
 const lecteur = document.getElementById("lecteur");
-const listeConversations = document.getElementById("liste-conversations");
-const zoneAvantPropos = document.getElementById("zone-avant-propos");
-const titreEnCours = document.getElementById("titre-en-cours");
-const message = document.getElementById("message");
+const listeConversations =
+    document.getElementById("listeConversations");
+const titreEnCours = document.getElementById("titreEnCours");
+const boutonPleinEcran =
+    document.getElementById("boutonPleinEcran");
+const retourPresentation =
+    document.getElementById("retourPresentation");
 
-let indexEnCours = -1;
-
+let indexActif = -1;
+let boutonActif = null;
+let lectureAutomatique = false;
 
 /*
-    Création automatique des 62 boutons
-*/
-conversations.forEach(function (conversation, index) {
-    const bouton = document.createElement("button");
+ * Création de la liste des boutons.
+ */
+function creerBoutons() {
+    listeConversations.innerHTML = "";
 
-    bouton.type = "button";
-    bouton.className = "conversation";
-    bouton.dataset.index = index;
+    conversations.forEach((conversation, index) => {
+        const bouton = document.createElement("button");
 
-    if (conversation.numero === 0) {
+        bouton.type = "button";
+        bouton.className = "bouton-conversation";
+        bouton.dataset.index = String(index);
+        bouton.setAttribute("aria-pressed", "false");
 
-        bouton.classList.add("avant-propos");
+        const numero = document.createElement("span");
+        numero.className = "numero";
+        numero.textContent =
+            conversation.numero === "A"
+                ? "A."
+                : `${conversation.numero}.`;
 
-        bouton.innerHTML =
-            "<span>" +
-            conversation.titre +
-            "</span>";
+        const titre = document.createElement("span");
+        titre.className = "titre-conversation";
+        titre.textContent = conversation.titre;
 
-    } else {
+        const icone = document.createElement("span");
+        icone.className = "icone-etat";
+        icone.setAttribute("aria-hidden", "true");
+        icone.textContent = "▶";
 
-        const numero = String(conversation.numero).padStart(2,"0");
+        bouton.append(numero, titre, icone);
 
-            bouton.innerHTML =
-                "<span>" +
-                numero +
-                " – " +
-                conversation.titre +
-                "</span>";
-    }
+        bouton.addEventListener("click", () => {
+            gererClicConversation(index, bouton);
+        });
 
-    bouton.addEventListener("click", function () {
-        lireConversation(index);
-    });
-
-    if (conversation.numero === 0) {
-        zoneAvantPropos.appendChild(bouton);
-    }
-    
-    else {
         listeConversations.appendChild(bouton);
-    }
-});
-
+    });
+}
 
 /*
-    Lance la conversation choisie
-*/
-function lireConversation(index) {
-    if (index < 0 || index >= conversations.length) {
+ * Premier clic : lecture.
+ * Deuxième clic sur le même bouton : pause.
+ * Troisième clic : reprise au même endroit.
+ */
+async function gererClicConversation(index, bouton) {
+    const memePiste = index === indexActif;
+
+    if (memePiste) {
+        if (lecteur.paused) {
+            await reprendreLecture(bouton);
+        } else {
+            mettreEnPause(bouton);
+        }
+
         return;
     }
 
-    indexEnCours = index;
+    await chargerEtLire(index, bouton);
+}
 
-    const conversation = conversations[indexEnCours];
+/*
+ * Charge une nouvelle piste et commence sa lecture.
+ */
+async function chargerEtLire(index, bouton) {
+    reinitialiserBoutonActif();
 
-    message.textContent = "";
+    const conversation = conversations[index];
+
+    indexActif = index;
+    boutonActif = bouton;
+    lectureAutomatique = false;
 
     lecteur.src = conversation.audio;
     lecteur.load();
 
-    if (conversation.numero === 0) {
+    titreEnCours.textContent =
+        `${conversation.numero === "A" ? "Avant-propos" : `Conversation ${conversation.numero}`} — ${conversation.titre}`;
 
-        titreEnCours.textContent = "AVANT-PROPOS";
-        titreEnCours.classList.add("avant-propos-en-cours");
+    mettreBoutonEnLecture(bouton);
 
-    } else {
+    try {
+        await lecteur.play();
+    } catch (erreur) {
+        /*
+         * Le navigateur peut refuser la lecture si le fichier
+         * est inaccessible ou si son format n’est pas reconnu.
+         */
+        mettreBoutonNormal(bouton);
 
-        const numero = String(conversation.numero).padStart(2,"0");
-
-            titreEnCours.textContent =
-                numero +
-                " – " +
-                conversation.titre;
-
-        titreEnCours.classList.remove("avant-propos-en-cours");
-    }
-
-    actualiserBoutonActif();
-
-    lecteur.play().catch(function (erreur) {
-        console.error("La lecture n’a pas pu commencer :", erreur);
-
-        message.textContent =
-            "La lecture n’a pas pu commencer. Vérifiez que le fichier " +
-            conversation.audio +
-            " existe bien.";
-    });
-}
-
-
-/*
-    Met en évidence la conversation en cours
-*/
-function actualiserBoutonActif() {
-    const boutons = document.querySelectorAll(".conversation");
-
-    boutons.forEach(function (bouton, index) {
-        if (index === indexEnCours) {
-            bouton.classList.add("active");
-        } else {
-            bouton.classList.remove("active");
-        }
-    });
-}
-
-
-/*
-    Lorsque la piste se termine,
-    la piste suivante commence automatiquement
-*/
-lecteur.addEventListener("ended", function () {
-    const prochainIndex = indexEnCours + 1;
-
-    if (prochainIndex < conversations.length) {
-        lireConversation(prochainIndex);
-    } else {
         titreEnCours.textContent =
-            "La dernière conversation est terminée.";
+            "Impossible de démarrer cet enregistrement.";
 
-        message.textContent =
-            "Vous avez atteint la fin du Manuel de la conversation.";
-
-        indexEnCours = -1;
-        actualiserBoutonActif();
+        console.error(
+            "Erreur pendant la lecture du fichier audio :",
+            conversation.audio,
+            erreur
+        );
     }
-});
-
+}
 
 /*
-    Affiche un message si le fichier audio est introuvable
-    ou ne peut pas être lu
-*/
-lecteur.addEventListener("error", function () {
-    if (indexEnCours === -1) {
+ * Reprend la piste au même endroit après une pause.
+ */
+async function reprendreLecture(bouton) {
+    mettreBoutonEnLecture(bouton);
+
+    try {
+        await lecteur.play();
+    } catch (erreur) {
+        mettreBoutonNormal(bouton);
+
+        console.error(
+            "La reprise de la lecture a échoué :",
+            erreur
+        );
+    }
+}
+
+/*
+ * Met la piste en pause.
+ * Le bouton reprend son aspect normal.
+ */
+function mettreEnPause(bouton) {
+    lecteur.pause();
+    mettreBoutonNormal(bouton);
+}
+
+/*
+ * Aspect du bouton pendant la lecture.
+ */
+function mettreBoutonEnLecture(bouton) {
+    bouton.classList.add("en-lecture");
+    bouton.classList.remove("en-pause");
+    bouton.setAttribute("aria-pressed", "true");
+
+    const icone = bouton.querySelector(".icone-etat");
+
+    if (icone) {
+        icone.textContent = "Ⅱ";
+    }
+
+    bouton.scrollIntoView({
+        behavior: lectureAutomatique ? "smooth" : "auto",
+        block: "center"
+    });
+}
+
+/*
+ * Aspect normal du bouton pendant une pause.
+ */
+function mettreBoutonNormal(bouton) {
+    bouton.classList.remove("en-lecture");
+    bouton.classList.add("en-pause");
+    bouton.setAttribute("aria-pressed", "false");
+
+    const icone = bouton.querySelector(".icone-etat");
+
+    if (icone) {
+        icone.textContent = "▶";
+    }
+}
+
+/*
+ * Réinitialise l’ancien bouton lorsqu’on choisit
+ * une autre conversation.
+ */
+function reinitialiserBoutonActif() {
+    if (!boutonActif) {
         return;
     }
 
-    const conversation = conversations[indexEnCours];
-
-    console.error(
-        "Impossible de charger le fichier :",
-        conversation.audio
+    boutonActif.classList.remove(
+        "en-lecture",
+        "en-pause"
     );
 
-    message.textContent =
-        "Impossible de charger le fichier « " +
-        conversation.audio +
-        " ». Vérifiez son nom et son emplacement.";
+    boutonActif.setAttribute("aria-pressed", "false");
+
+    const icone =
+        boutonActif.querySelector(".icone-etat");
+
+    if (icone) {
+        icone.textContent = "▶";
+    }
+}
+
+/*
+ * Si l’utilisateur agit directement sur le lecteur audio,
+ * le bouton doit rester synchronisé.
+ */
+lecteur.addEventListener("play", () => {
+    if (boutonActif) {
+        mettreBoutonEnLecture(boutonActif);
+    }
 });
+
+lecteur.addEventListener("pause", () => {
+    /*
+     * L’événement pause est aussi déclenché juste avant ended.
+     * Dans ce cas, on laisse la fonction ended gérer la suite.
+     */
+    if (
+        boutonActif &&
+        !lecteur.ended
+    ) {
+        mettreBoutonNormal(boutonActif);
+    }
+});
+
+/*
+ * Lecture automatique de la piste suivante.
+ */
+lecteur.addEventListener("ended", async () => {
+    if (boutonActif) {
+        reinitialiserBoutonActif();
+    }
+
+    const indexSuivant = indexActif + 1;
+
+    if (indexSuivant >= conversations.length) {
+        titreEnCours.textContent =
+            "La lecture du Manuel de la conversation est terminée.";
+
+        indexActif = -1;
+        boutonActif = null;
+        return;
+    }
+
+    const boutons =
+        listeConversations.querySelectorAll(
+            ".bouton-conversation"
+        );
+
+    lectureAutomatique = true;
+
+    await chargerEtLire(
+        indexSuivant,
+        boutons[indexSuivant]
+    );
+});
+
+/*
+ * Gestion du plein écran depuis la page d’écoute.
+ */
+async function basculerPleinEcran() {
+    try {
+        if (
+            document.fullscreenElement ||
+            document.webkitFullscreenElement
+        ) {
+            if (document.exitFullscreen) {
+                await document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+
+            return;
+        }
+
+        const element = document.documentElement;
+
+        if (element.requestFullscreen) {
+            await element.requestFullscreen({
+                navigationUI: "hide"
+            });
+        } else if (element.webkitRequestFullscreen) {
+            element.webkitRequestFullscreen();
+        }
+    } catch (erreur) {
+        console.info(
+            "Le plein écran n’est pas disponible.",
+            erreur
+        );
+    }
+}
+
+boutonPleinEcran.addEventListener(
+    "click",
+    basculerPleinEcran
+);
+
+function mettreAJourIconePleinEcran() {
+    const estEnPleinEcran =
+        Boolean(
+            document.fullscreenElement ||
+            document.webkitFullscreenElement
+        );
+
+    boutonPleinEcran.textContent =
+        estEnPleinEcran ? "↙" : "⛶";
+
+    boutonPleinEcran.title =
+        estEnPleinEcran
+            ? "Quitter le plein écran"
+            : "Passer en plein écran";
+}
+
+document.addEventListener(
+    "fullscreenchange",
+    mettreAJourIconePleinEcran
+);
+
+document.addEventListener(
+    "webkitfullscreenchange",
+    mettreAJourIconePleinEcran
+);
+
+/*
+ * Retour vers la page de présentation.
+ *
+ * Si index.html est affiché dans presentation.html,
+ * on demande à la page parente de fermer le lecteur.
+ *
+ * Si index.html a été ouvert directement, on revient
+ * simplement vers presentation.html.
+ */
+retourPresentation.addEventListener("click", () => {
+    if (window.parent !== window) {
+        window.parent.postMessage(
+            "fermer-le-lecteur",
+            "*"
+        );
+    } else {
+        window.location.href = "presentation.html";
+    }
+});
+
+creerBoutons();
