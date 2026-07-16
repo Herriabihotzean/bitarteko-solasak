@@ -91,11 +91,13 @@ function creerBoutons() {
 
 
             if (estAvantPropos(conversation)) {
-                numero.textContent = "";
+                numero.style.display = "none";
 
                 titre.textContent =
                     "AVANT-PROPOS";
 
+                titre.style.flex = "none";
+                
                 bouton.classList.add(
                     "avant-propos"
                 );
