@@ -21,7 +21,7 @@ fieldset{margin:0 0 22px;padding:20px;border:1px solid rgba(255,255,255,.5);bord
 <script>
 "use strict";
 const PRIX_LIVRE=25,FRAIS_LIVRAISON=7.50;
-const URL_APPS_SCRIPT="COLLEZ_ICI_URL_APPS_SCRIPT";
+const URL_APPS_SCRIPT="https://script.google.com/macros/s/AKfycbz4yyMo6MlH493KkoFDMjgRHIOrvc88-hHMn-QMAeRZHPX8X2Xubpk8fsndOU-1nXREoA/exec";
 const LIENS_PAYPAL={1:"COLLEZ_ICI_LIEN_PAYPAL_1_EXEMPLAIRE",2:"COLLEZ_ICI_LIEN_PAYPAL_2_EXEMPLAIRES",3:"COLLEZ_ICI_LIEN_PAYPAL_3_EXEMPLAIRES",4:"COLLEZ_ICI_LIEN_PAYPAL_4_EXEMPLAIRES",5:"COLLEZ_ICI_LIEN_PAYPAL_5_EXEMPLAIRES"};
 const formulaire=document.getElementById("formulaireCommande"),quantite=document.getElementById("quantite"),prixUnitaire=document.getElementById("prixUnitaire"),quantiteAffichee=document.getElementById("quantiteAffichee"),prixLivraison=document.getElementById("prixLivraison"),prixTotal=document.getElementById("prixTotal"),totalCache=document.getElementById("totalCache"),messageEtat=document.getElementById("messageEtat");
 function formaterPrix(m){return m.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})}
