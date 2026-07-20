@@ -1,17 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="fr">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <title>Écouter — Manuel de la conversation</title>
-
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Écouter — Manuel de la conversation</title>
+<style>
         * {
             box-sizing: border-box;
         }
@@ -363,104 +357,48 @@
             }
         }
     </style>
-</head>
-
+<link href="langues.css" rel="stylesheet"/></head>
 <body>
-
-    <header class="barre-superieure">
-
-        <div class="ligne-titres">
-
-            <img
-                src="blason-navarre.svg"
-                class="blason blason-gauche"
-                alt="Blason de la Navarre"
-            >
-
-            <div class="titres">
-
-                <h1 class="titre-principal">
+<header class="barre-superieure">
+<div class="ligne-titres">
+<img alt="Blason de la Navarre" class="blason blason-gauche" src="blason-navarre.svg"/>
+<div class="titres">
+<h1 class="titre-principal">
                     Manuel de la conversation
                 </h1>
-
-                <p class="sous-titre">
+<p class="sous-titre">
                     ESKU LIBURUA MINTZATZEN IKHASTEKO
                 </p>
-
-            </div>
-
-            <img
-                src="blason-labourd.svg"
-                class="blason blason-droit"
-                alt="Blason du Labourd"
-            >
-
-        </div>
-
-        <div
-            id="titreEnCours"
-            aria-live="polite"
-        >
+</div>
+<img alt="Blason du Labourd" class="blason blason-droit" src="blason-labourd.svg"/>
+</div>
+<div aria-live="polite" id="titreEnCours">
             Aucun enregistrement sélectionné
         </div>
-
-        <audio
-            id="lecteur"
-            controls
-            preload="metadata"
-        ></audio>
-
-        <div class="commandes-navigation">
-
-            <button
-                id="retourPresentation"
-                class="bouton-navigation"
-                type="button"
-                aria-label="Retour à la présentation"
-            >
+<audio controls="" id="lecteur" preload="metadata"></audio>
+<div class="commandes-navigation">
+<button aria-label="Retour à la présentation" class="bouton-navigation" id="retourPresentation" type="button">
                 ←
                 <span class="texte-retour">
                     Présentation
                 </span>
-            </button>
-
-            <div class="espace-navigation"></div>
-
-            <button
-                id="boutonPleinEcran"
-                class="bouton-navigation"
-                type="button"
-                aria-label="Activer ou quitter le plein écran"
-                title="Activer ou quitter le plein écran"
-            >
+</button>
+<div class="espace-navigation"></div>
+<button aria-label="Activer ou quitter le plein écran" class="bouton-navigation" id="boutonPleinEcran" title="Activer ou quitter le plein écran" type="button">
                 ⛶
             </button>
-
-        </div>
-
-    </header>
-
-    <main>
-
-        <div id="zoneAvantPropos"></div>
-
-        <p class="instruction">
+</div>
+</header>
+<main>
+<div id="zoneAvantPropos"></div>
+<p class="instruction">
             Choisissez un dialogue. La lecture se poursuivra
             automatiquement dans l’ordre.
         </p>
-
-        <section
-            id="listeConversations"
-            aria-label="Liste des dialogues"
-        ></section>
-
-        <p id="message"></p>
-
-    </main>
-
-    <script src="conversations.js"></script>
-    <script src="script.js"></script>
-
-</body>
-
+<section aria-label="Liste des dialogues" id="listeConversations"></section>
+<p id="message"></p>
+</main>
+<script src="conversations.js"></script>
+<script src="script.js"></script>
+<script src="langues.js"></script></body>
 </html>
