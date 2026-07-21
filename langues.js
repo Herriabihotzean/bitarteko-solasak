@@ -114,7 +114,7 @@ const HB_TRANSLATIONS={"eu": {
   "Idem. Sur les accidents, les maladies et les morts": "Orobat. Gerthari gaixto, eritasun, ela hilen gainean",
   "Idem. Sur les récoltes, les vendanges et le cours de divers prix": "Orobat. Bihi alxatze, mahats biltze eta asko prezioen kurtsaren gainean",
   "Idem. Sur le temps": "Orobat. Demboraren gainean",
-  "Idem. sur l'heure": "Orobat. Tenoraren gainean",
+  "Idem. Sur l'heure": "Orobat. Tenoraren gainean",
   "Idem. Sur le français et le basque": "Orobat. Frantsesaren eta eskuararen gainean",
   "Idem. Pour affirmer et nier une chose": "Orobat. Gauza baten sustengatzeko eta ukhatzeko",
   "Idem. Pour exprimer le doute, la surprise, l'admiration": "Orobat. Gauza dudazkoen, ustegabekoen eta miragarrien erraiteko",
