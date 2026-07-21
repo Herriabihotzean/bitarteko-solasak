@@ -178,18 +178,45 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
   }
 
   function lookup(original, language) {
-    if (language === "fr") return original;
-    const clean = String(original).trim();
-    if (!clean) return original;
-    const dictionary = (HB_TRANSLATIONS && HB_TRANSLATIONS[language]) || {};
-    let translated = dictionary[clean];
-    if (!translated) {
-      const numbered = clean.match(/^(\d+\.\s*)(.+)$/);
-      if (numbered && dictionary[numbered[2]]) {
-        translated = numbered[1] + dictionary[numbered[2]];
-      }
+    if (language === "fr") {
+        return original;
     }
-    return translated ? String(original).replace(clean, translated) : original;
+    const clean = String(original).trim();
+    if (!clean) {
+        return original;
+    }
+    const dictionary =
+        (HB_TRANSLATIONS && HB_TRANSLATIONS[language]) || {};
+    let translated;
+    if (
+        Object.prototype.hasOwnProperty.call(
+            dictionary,
+            clean
+        )
+    ) {
+        translated = dictionary[clean];
+    } else {
+        const numbered =
+            clean.match(/^(\d+\.\s*)(.+)$/);
+        if (
+            numbered &&
+            Object.prototype.hasOwnProperty.call(
+                dictionary,
+                numbered[2]
+            )
+        ) {
+            translated =
+                numbered[1] +
+                dictionary[numbered[2]];
+        }
+    }
+    if (translated === undefined) {
+        return original;
+    }
+    return String(original).replace(
+        clean,
+        translated
+    );
   }
 
   function rememberTextNode(node) {
@@ -202,18 +229,14 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
     if (node.parentElement.closest(".language-switcher")) return;
     rememberTextNode(node);
     const original = textOriginals.get(node);
-    if (language === "fr") {
-    next = original;
-    } else {
-      const traduction = lookup(original, language);
+    const next =
+      language === "fr"
+        ? original
+        : lookup(original, language);
 
-      next =
-        traduction === undefined
-            ? original
-            : traduction;
+    if (node.nodeValue !== next) {
+      node.nodeValue = next;
     }
-    if (node.nodeValue !== next) node.nodeValue = next;
-  }
 
   function translateAttributes(element, language) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) return;
