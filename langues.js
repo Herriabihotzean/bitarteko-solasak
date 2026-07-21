@@ -120,7 +120,7 @@ const HB_TRANSLATIONS={"eu": {
   "Idem Pour exprimer le doute, la surprise, l'admiration": "Orobat. Gauza dudazkoen, ustegabekoen eta miragarrien erraiteko",
   "Idem. Pour témoigner la joie et l'affliction": "Orobat. Bozkarioa eta atsekhabearen seinalatzeko",
   "Idem. Pour faire des reproches, pour menacer, pour exprimer sa colère": "Orobat. Gaizkien erraiteko, mehatxatzeko, haserreduraren erakhusteko",
-  "Pour acheter ou vendre un cheval, une paire de boeufs, une vache, etc.": "Zaldi baten, idi pare baten, behi baten erosteko edo saltzeko, etc.",
+  "Pour acheter ou vendre un cheval, une paire de bœufs, une vache, etc.": "Zaldi baten, idi pare baten, behi baten erosteko edo saltzeko, etc.",
   "Pour acheter volaille, poissons, légumes, fruits au marché": "Merkhatuan, purailleria, arrain, eltzekari, fruitu erosteko",
   "Pour acheter des meubles": "Mubleen erosteko",
   "Pour acheter des vêtements": "Arropen erosteko",
