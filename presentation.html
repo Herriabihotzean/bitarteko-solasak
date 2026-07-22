@@ -19,7 +19,15 @@ h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>
 .bandeau-ecouter{position:fixed;z-index:1000;right:0;bottom:0;left:0;min-height:82px;padding:12px max(18px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));background:rgba(115,0,0,.97);box-shadow:0 -5px 20px rgba(0,0,0,.35)}
 #ouvrirLecteur{display:block;width:min(760px,100%);min-height:56px;margin:0 auto;border:2px solid white;border-radius:7px;background:white;color:#790000;font:inherit;font-size:clamp(1.05rem,3.5vw,1.35rem);font-weight:bold;letter-spacing:.05em;cursor:pointer}
 #lecteurPleinEcran{position:fixed;z-index:5000;inset:0;display:none;width:100vw;height:100dvh;background:#111;overflow:hidden}#lecteurPleinEcran.ouvert{display:block}#cadreLecteur{display:block;width:100vw;height:100dvh;border:0;background:#111}
-@media(max-width:600px){body{background-attachment:scroll}header{min-height:65vh;padding:40px 10px}.titre{padding:35px 18px}.page{width:min(100% - 20px,900px)}.contenu{padding:28px 20px}.contenu>p{text-align:left;hyphens:none}.bouton-details{padding-left:16px;font-size:.92rem}.icone-livre{width:62px;height:48px}}
+@media(max-width:600px){body{background-attachment:scroll}header{min-height:65vh;padding:40px 10px}.titre{padding:35px 18px}.page{width:min(100% - 20px,900px)}.contenu{padding:28px 20px}
+.contenu>p{
+    text-align:justify;
+    text-justify:inter-word;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+}
+
+.bouton-details{padding-left:16px;font-size:.92rem}.icone-livre{width:62px;height:48px}}
 .retour-site{display:block;width:max-content;max-width:calc(100% - 32px);margin:18px auto 0;padding:10px 16px;border:1px solid rgba(255,255,255,.75);border-radius:7px;background:rgba(0,0,0,.48);color:white;text-decoration:none;text-align:center;font-weight:bold}.retour-site:hover,.retour-site:focus-visible{background:white;color:#222}
 .titre-ouvrage{
     font-style:italic;
