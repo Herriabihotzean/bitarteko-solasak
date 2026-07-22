@@ -142,7 +142,7 @@ const HB_TRANSLATIONS={"eu": {
   "L. B. d'excuse de n'avoir pas répondu": "L. B. barkamendu eskatzeko errepostua ez eginik",
   "L. B. de recommandation pour procurer une place à un jeune homme": "L. B. gomendiozkoak lekhu bil-hatzeko, muthil gazte bati",
   "L. B. pour donner des conseils" : "L. B. kontseiluen emaiteko",
-  "L.B. d'un père à un ami, pour recommander un enfant partant pour l'Amérique": "L.B. aita batek adiskide bati, Ameriketarat dohan haur baten gomendatzeko",
+  "L. B. d'un père à un ami, pour recommander un enfant partant pour l'Amérique": "L.B. aita batek adiskide bati, Ameriketarat dohan haur baten gomendatzeko",
   "Proverbes basques": "Eskualdunen zuhur hitzak",
   "Le" : "",
   "Manuel de la conversation" : "Mintzatzen ikhasteko esku-liburua",
