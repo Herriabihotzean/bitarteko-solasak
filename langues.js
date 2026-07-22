@@ -237,6 +237,7 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
     if (node.nodeValue !== next) {
       node.nodeValue = next;
     }
+  }
 
   function translateAttributes(element, language) {
     if (!element || element.nodeType !== Node.ELEMENT_NODE) return;
