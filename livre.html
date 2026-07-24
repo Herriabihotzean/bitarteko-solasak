@@ -273,16 +273,6 @@ window.recevoirProduit = function (reponse) {
 
   const produit = reponse.produit;
 
-  document
-    .getElementById("titreProduit")
-    .textContent =
-      produit.titre;
-
-  document
-    .getElementById("sousTitreProduit")
-    .textContent =
-      produit.sousTitre || "";
-
   prix.textContent =
     "Prix : " +
     euro(produit.prix) +
