@@ -6,3 +6,6 @@
 @media(max-width:520px){.language-choice .language-label{font-size:.72rem!important}}
 
 .language-choice.active .language-label{font-weight:700!important}
+
+
+[data-lang][hidden]{display:none!important}

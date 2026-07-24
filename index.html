@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-
-<html lang="fr">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
-<title>Écouter — Manuel de la conversation</title>
-<style>
-        * {
+<html data-title-eu="Entzun — Mintzatzeko esku-liburua" data-title-fr="Écouter — Manuel de la conversation" lang="fr">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+  <title>
+   Écouter — Manuel de la conversation
+  </title>
+  <style>
+   * {
             box-sizing: border-box;
         }
 
@@ -356,49 +357,75 @@
                 min-width: 0;
             }
         }
-    </style>
-<link href="langues.css" rel="stylesheet"/></head>
-<body>
-<header class="barre-superieure">
-<div class="ligne-titres">
-<img alt="Blason de la Navarre" class="blason blason-gauche" src="blason-navarre.svg"/>
-<div class="titres">
-<h1 class="titre-principal">
-                    Manuel de la conversation
-                </h1>
-<p class="sous-titre">
-                    ESKU LIBURUA MINTZATZEN IKHASTEKO
-                </p>
-</div>
-<img alt="Blason du Labourd" class="blason blason-droit" src="blason-labourd.svg"/>
-</div>
-<div aria-live="polite" id="titreEnCours">
-            Aucun enregistrement sélectionné
-        </div>
-<audio controls="" id="lecteur" preload="metadata"></audio>
-<div class="commandes-navigation">
-<button aria-label="Retour à la présentation" class="bouton-navigation" id="retourPresentation" type="button">
-                ←
-                <span class="texte-retour">
-                    Présentation
-                </span>
-</button>
-<div class="espace-navigation"></div>
-<button aria-label="Activer ou quitter le plein écran" class="bouton-navigation" id="boutonPleinEcran" title="Activer ou quitter le plein écran" type="button">
-                ⛶
-            </button>
-</div>
-</header>
-<main>
-<div id="zoneAvantPropos"></div>
-<p class="instruction">
-            <span>Choisissez un dialogue</span>.
-            <span>La lecture se poursuivra automatiquement dans l’ordre</span>.
-        </p>
-<section aria-label="Liste des dialogues" id="listeConversations"></section>
-<p id="message"></p>
-</main>
-<script src="conversations.js"></script>
-<script src="script.js"></script>
-<script src="langues.js"></script></body>
+  </style>
+  <link href="langues.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <header class="barre-superieure">
+   <div class="ligne-titres">
+    <img alt="Blason de la Navarre" class="blason blason-gauche" src="blason-navarre.svg"/>
+    <div class="titres">
+     <h1 class="titre-principal">
+      <span data-eu="Mintzatzen ikhasteko esku-liburua" data-fr="Manuel de la conversation">
+       Manuel de la conversation
+      </span>
+     </h1>
+     <p class="sous-titre">
+      ESKU LIBURUA MINTZATZEN IKHASTEKO
+     </p>
+    </div>
+    <img alt="Blason du Labourd" class="blason blason-droit" src="blason-labourd.svg"/>
+   </div>
+   <div aria-live="polite" id="titreEnCours">
+    <span data-eu="Ez da grabaketarik hautatu" data-fr="Aucun enregistrement sélectionné">
+     Aucun enregistrement sélectionné
+    </span>
+   </div>
+   <audio controls="" id="lecteur" preload="metadata">
+   </audio>
+   <div class="commandes-navigation">
+    <button aria-label="Retour à la présentation" class="bouton-navigation" id="retourPresentation" type="button">
+     ←
+     <span class="texte-retour">
+      <span data-eu="Erakuspena" data-fr="Présentation">
+       Présentation
+      </span>
+     </span>
+    </button>
+    <div class="espace-navigation">
+    </div>
+    <button aria-label="Activer ou quitter le plein écran" class="bouton-navigation" id="boutonPleinEcran" title="Activer ou quitter le plein écran" type="button">
+     ⛶
+    </button>
+   </div>
+  </header>
+  <main>
+   <div id="zoneAvantPropos">
+   </div>
+   <p class="instruction">
+    <span>
+     <span data-eu="Hauta zazu solasaldi bat" data-fr="Choisissez un dialogue">
+      Choisissez un dialogue
+     </span>
+    </span>
+    .
+    <span>
+     <span data-eu="Entzunaldia bere baitharik segituko da ordenan" data-fr="La lecture se poursuivra automatiquement dans l’ordre">
+      La lecture se poursuivra automatiquement dans l’ordre
+     </span>
+    </span>
+    .
+   </p>
+   <section aria-label="Liste des dialogues" id="listeConversations">
+   </section>
+   <p id="message">
+   </p>
+  </main>
+  <script src="conversations.js">
+  </script>
+  <script src="script.js">
+  </script>
+  <script src="langues.js">
+  </script>
+ </body>
 </html>
