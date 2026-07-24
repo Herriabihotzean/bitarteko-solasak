@@ -132,7 +132,7 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
   }
 
   function switchLanguageBlocks(language) {
-    document.querySelectorAll("[data-lang]").forEach((element) => {
+    document.querySelectorAll("[data-lang]:not(.language-choice)").forEach((element) => {
       element.hidden = element.dataset.lang !== language;
     });
   }
