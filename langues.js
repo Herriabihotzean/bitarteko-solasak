@@ -137,6 +137,19 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
     });
   }
 
+
+  function updatePageTitle(language) {
+    const root = document.documentElement;
+    const title =
+      language === "eu"
+        ? root.dataset.titleEu
+        : root.dataset.titleFr;
+
+    if (title) {
+      document.title = title;
+    }
+  }
+
   function updateButtons(language) {
     const labels = HB_LABELS[language] || HB_LABELS.fr;
     document.querySelectorAll(".language-choice").forEach((button) => {
@@ -196,6 +209,7 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
     switchHistorySection(language);
     switchLanguageBlocks(language);
     translateSubtree(document.body, language);
+    updatePageTitle(language);
     document.documentElement.lang = language === "eu" ? "eu" : language === "be" ? "oc" : "fr";
     updateButtons(language);
     applying = false;

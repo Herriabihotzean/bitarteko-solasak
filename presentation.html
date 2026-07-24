@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html data-title-eu="Manuel de la conversation" data-title-fr="Manuel de la conversation" lang="fr">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
@@ -157,8 +157,13 @@ window.recevoirProduit = function (p) {
     document.getElementById("sousTitreProduit").textContent =
         p.produit.sousTitre || "";
 
-    document.title =
-        p.produit.titre;
+    if (
+        !window.hbCurrentLanguage ||
+        window.hbCurrentLanguage() === "fr"
+    ) {
+        document.title =
+            p.produit.titre;
+    }
 };
 
 (function chargerProduit() {
