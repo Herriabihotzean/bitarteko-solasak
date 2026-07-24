@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-title-eu="Manuel de la conversation" data-title-fr="Manuel de la conversation" lang="fr">
+<html data-title-eu="Mintzatzen ikhasteko esku-liburua" data-title-fr="Manuel de la conversation" lang="fr">
  <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
@@ -34,6 +34,7 @@ h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>
     font-style:italic;
 }
    [data-lang][hidden]{display:none!important}
+   [data-page-title-lang][hidden]{display:none!important}
   </style>
   <link href="langues.css" rel="stylesheet"/>
  </head>
@@ -41,7 +42,12 @@ h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>
   <header>
    <div class="titre">
     <h1 id="titreProduit">
-     Manuel de la conversation
+     <span data-page-title-lang="fr">
+      Manuel de la conversation
+     </span>
+     <span data-page-title-lang="eu" hidden="">
+      Mintzatzen ikhasteko esku-liburua
+     </span>
     </h1>
     <p class="sous-titre" id="sousTitreProduit">
      abbés Darthayet et Daranatz
@@ -54,7 +60,12 @@ h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>
   <main class="page">
    <article class="contenu">
     <h2>
-     Écouter, comprendre et parler
+     <span data-page-title-lang="fr">
+      Écouter, comprendre et parler
+     </span>
+     <span data-page-title-lang="eu" hidden="">
+      Entzun, ulertu eta mintzatu
+     </span>
     </h2>
     <p data-lang="fr">
      Le
@@ -151,19 +162,13 @@ window.recevoirProduit = function (p) {
         return;
     }
 
-    document.getElementById("titreProduit").textContent =
-        p.produit.titre;
+    const titreProduit = document.getElementById("titreProduit");
+    if (titreProduit && !titreProduit.querySelector("[data-page-title-lang]")) {
+        titreProduit.textContent = p?.produit?.titre || produit?.titre || "";
+    }
 
     document.getElementById("sousTitreProduit").textContent =
         p.produit.sousTitre || "";
-
-    if (
-        !window.hbCurrentLanguage ||
-        window.hbCurrentLanguage() === "fr"
-    ) {
-        document.title =
-            p.produit.titre;
-    }
 };
 
 (function chargerProduit() {

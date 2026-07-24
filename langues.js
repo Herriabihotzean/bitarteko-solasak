@@ -77,7 +77,7 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
   function translateTextNode(node, language) {
     if (!node || !node.parentElement) return;
     if (["SCRIPT", "STYLE", "TEXTAREA", "NOSCRIPT"].includes(node.parentElement.tagName)) return;
-    if (node.parentElement.closest(".language-switcher, [data-lang]")) return;
+    if (node.parentElement.closest(".language-switcher, [data-lang], [data-page-title-lang]")) return;
     rememberTextNode(node);
     const original = textOriginals.get(node);
     const next =
@@ -138,7 +138,13 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
   }
 
 
-  function updatePageTitle(language) {
+  function switchPageTitles(language) {
+    document.querySelectorAll("[data-page-title-lang]").forEach((element) => {
+      element.hidden = element.dataset.pageTitleLang !== language;
+    });
+  }
+
+  function updateBrowserTitle(language) {
     const root = document.documentElement;
     const title =
       language === "eu"
@@ -208,8 +214,9 @@ const HB_LABELS={"fr": {"fr": "français", "eu": "basque", "be": "béarnais"}, "
     applying = true;
     switchHistorySection(language);
     switchLanguageBlocks(language);
+    switchPageTitles(language);
     translateSubtree(document.body, language);
-    updatePageTitle(language);
+    updateBrowserTitle(language);
     document.documentElement.lang = language === "eu" ? "eu" : language === "be" ? "oc" : "fr";
     updateButtons(language);
     applying = false;
