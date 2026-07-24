@@ -1,532 +1,58 @@
 <!DOCTYPE html>
-<html lang="fr"
-      data-title-fr="Manuel de la conversation"
-      data-title-eu="Mintzatzen ikhasteko esku-liburua">
+
+<html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Manuel de la conversation</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0,viewport-fit=cover" name="viewport"/>
+<title>Manuel de la conversation</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;padding:0 0 105px;font-family:Georgia,"Times New Roman",serif;background:linear-gradient(rgba(20,20,20,.56),rgba(20,20,20,.66)),url("Un dimanche d'été à Ascain.jpeg") center/cover fixed;color:white;line-height:1.7}
+.page{width:min(900px,calc(100% - 32px));margin:0 auto}
+header{min-height:72vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:70px 20px}
+.titre{max-width:760px;padding:42px 30px;border:1px solid rgba(255,255,255,.45);background:rgba(0,0,0,.32);backdrop-filter:blur(4px)}
+h1{margin:0;font-size:clamp(2.1rem,7vw,4.4rem);line-height:1.12;letter-spacing:.04em}.sous-titre{margin:20px 0 0;font-size:clamp(1.1rem,3vw,1.55rem);font-style:italic}
+main{margin-bottom:40px}.contenu{padding:clamp(28px,6vw,65px);border-radius:5px;background:rgba(0,0,0,.62);box-shadow:0 12px 45px rgba(0,0,0,.34)}
+h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>p{margin:0 0 1.35em;font-size:clamp(1.05rem,2.5vw,1.22rem);text-align:justify;hyphens:auto}
+.caracteristiques{margin:40px 0;padding:25px;border-top:1px solid rgba(255,255,255,.35);border-bottom:1px solid rgba(255,255,255,.35);text-align:center}.caracteristiques p{margin:8px 0}
+.bouton-details{display:flex;align-items:center;justify-content:center;gap:14px;width:min(560px,100%);min-height:74px;margin:45px auto 5px;padding:12px 18px 12px 24px;border:2px solid white;border-radius:7px;background:rgba(255,255,255,.08);color:white;font:inherit;font-size:1.02rem;font-weight:bold;text-align:center;text-decoration:none;transition:.2s}.bouton-details:hover,.bouton-details:focus-visible{background:white;color:#222;transform:translateY(-2px)}.icone-livre{width:74px;height:54px;object-fit:contain;flex:0 0 auto}
+.bandeau-ecouter{position:fixed;z-index:1000;right:0;bottom:0;left:0;min-height:82px;padding:12px max(18px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));background:rgba(115,0,0,.97);box-shadow:0 -5px 20px rgba(0,0,0,.35)}
+#ouvrirLecteur{display:block;width:min(760px,100%);min-height:56px;margin:0 auto;border:2px solid white;border-radius:7px;background:white;color:#790000;font:inherit;font-size:clamp(1.05rem,3.5vw,1.35rem);font-weight:bold;letter-spacing:.05em;cursor:pointer}
+#lecteurPleinEcran{position:fixed;z-index:5000;inset:0;display:none;width:100vw;height:100dvh;background:#111;overflow:hidden}#lecteurPleinEcran.ouvert{display:block}#cadreLecteur{display:block;width:100vw;height:100dvh;border:0;background:#111}
+@media(max-width:600px){body{background-attachment:scroll}header{min-height:65vh;padding:40px 10px}.titre{padding:35px 18px}.page{width:min(100% - 20px,900px)}.contenu{padding:28px 20px}
+.contenu>p{
+    text-align:justify;
+    text-justify:inter-word;
+    hyphens:auto;
+    -webkit-hyphens:auto;
+}
 
-  <link rel="stylesheet" href="langues.css">
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      padding: 0 0 105px;
-      font-family: Georgia, "Times New Roman", serif;
-      color: white;
-      line-height: 1.7;
-      background:
-        linear-gradient(rgba(20,20,20,.56), rgba(20,20,20,.66)),
-        url("Un dimanche d'été à Ascain.jpeg") center / cover fixed;
-    }
-
-    /* Sélecteur de langue : style essentiel intégré à la page,
-       afin qu'il reste visible même si langues.css est mal chargé. */
-    .language-switcher {
-      position: fixed !important;
-      top: max(10px, env(safe-area-inset-top)) !important;
-      right: max(12px, env(safe-area-inset-right)) !important;
-      z-index: 4500 !important;
-      display: flex !important;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 9px;
-      border: 1px solid rgba(255,255,255,.65);
-      border-radius: 9px;
-      background: rgba(20,55,32,.96);
-      box-shadow: 0 4px 16px rgba(0,0,0,.35);
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-
-    .language-choice {
-      display: flex !important;
-      align-items: center;
-      gap: 6px;
-      min-height: 38px;
-      padding: 5px 8px;
-      border: 1px solid transparent;
-      border-radius: 6px;
-      background: transparent;
-      color: white;
-      font: inherit;
-      cursor: pointer;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-
-    .language-choice img {
-      display: block;
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-    }
-
-    .language-choice.active {
-      border-color: white;
-      background: rgba(255,255,255,.16);
-      font-weight: bold;
-    }
-
-    .page {
-      width: min(900px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    header {
-      min-height: 72vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 90px 20px 70px;
-      text-align: center;
-    }
-
-    .titre {
-      max-width: 760px;
-      padding: 42px 30px;
-      border: 1px solid rgba(255,255,255,.45);
-      background: rgba(0,0,0,.32);
-      backdrop-filter: blur(4px);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2.1rem, 7vw, 4.4rem);
-      line-height: 1.12;
-      letter-spacing: .04em;
-    }
-
-    .sous-titre {
-      margin: 20px 0 0;
-      font-size: clamp(1.1rem, 3vw, 1.55rem);
-      font-style: italic;
-    }
-
-    main {
-      margin-bottom: 40px;
-    }
-
-    .contenu {
-      padding: clamp(28px, 6vw, 65px);
-      border-radius: 5px;
-      background: rgba(0,0,0,.62);
-      box-shadow: 0 12px 45px rgba(0,0,0,.34);
-    }
-
-    h2 {
-      margin-top: 0;
-      font-size: clamp(1.55rem, 4vw, 2.25rem);
-      text-align: center;
-    }
-
-    .contenu > p {
-      margin: 0 0 1.35em;
-      font-size: clamp(1.05rem, 2.5vw, 1.22rem);
-      text-align: justify;
-      text-justify: inter-word;
-      hyphens: auto;
-      -webkit-hyphens: auto;
-    }
-
-    [data-lang][hidden] {
-      display: none !important;
-    }
-
-    .caracteristiques {
-      margin: 40px 0;
-      padding: 25px;
-      border-top: 1px solid rgba(255,255,255,.35);
-      border-bottom: 1px solid rgba(255,255,255,.35);
-      text-align: center;
-    }
-
-    .caracteristiques p {
-      margin: 8px 0;
-    }
-
-    .retour-site {
-      display: block;
-      width: max-content;
-      max-width: calc(100% - 32px);
-      margin: 18px auto 0;
-      padding: 10px 16px;
-      border: 1px solid rgba(255,255,255,.75);
-      border-radius: 7px;
-      background: rgba(0,0,0,.48);
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .retour-site:hover,
-    .retour-site:focus-visible {
-      background: white;
-      color: #222;
-    }
-
-    .bouton-details {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      width: min(560px, 100%);
-      min-height: 74px;
-      margin: 45px auto 5px;
-      padding: 12px 18px 12px 24px;
-      border: 2px solid white;
-      border-radius: 7px;
-      background: rgba(255,255,255,.08);
-      color: white;
-      font: inherit;
-      font-size: 1.02rem;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      transition: .2s;
-    }
-
-    .bouton-details:hover,
-    .bouton-details:focus-visible {
-      background: white;
-      color: #222;
-      transform: translateY(-2px);
-    }
-
-    .icone-livre {
-      width: 74px;
-      height: 54px;
-      flex: 0 0 auto;
-      object-fit: contain;
-    }
-
-    /* Le bandeau de lecture est toujours visible sur la page,
-       mais passe derrière le lecteur quand celui-ci est ouvert. */
-    .bandeau-ecouter {
-      position: fixed !important;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 4000 !important;
-      display: block !important;
-      min-height: 82px;
-      padding:
-        12px max(18px, env(safe-area-inset-right))
-        calc(12px + env(safe-area-inset-bottom))
-        max(18px, env(safe-area-inset-left));
-      background: rgba(115,0,0,.97);
-      box-shadow: 0 -5px 20px rgba(0,0,0,.35);
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-
-    #ouvrirLecteur {
-      display: block !important;
-      width: min(760px, 100%);
-      min-height: 56px;
-      margin: 0 auto;
-      border: 2px solid white;
-      border-radius: 7px;
-      background: white;
-      color: #790000;
-      font: inherit;
-      font-size: clamp(1.05rem, 3.5vw, 1.35rem);
-      font-weight: bold;
-      letter-spacing: .05em;
-      cursor: pointer;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-
-    #lecteurPleinEcran {
-      position: fixed;
-      z-index: 5000;
-      inset: 0;
-      display: none;
-      width: 100vw;
-      height: 100dvh;
-      overflow: hidden;
-      background: #111;
-    }
-
-    #lecteurPleinEcran.ouvert {
-      display: block;
-    }
-
-    #cadreLecteur {
-      display: block;
-      width: 100vw;
-      height: 100dvh;
-      border: 0;
-      background: #111;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        background-attachment: scroll;
-      }
-
-      .language-switcher {
-        top: max(6px, env(safe-area-inset-top)) !important;
-        right: max(6px, env(safe-area-inset-right)) !important;
-        gap: 4px;
-        padding: 5px 6px;
-      }
-
-      .language-choice {
-        padding: 4px 6px;
-      }
-
-      .language-choice img {
-        width: 24px;
-        height: 24px;
-      }
-
-      .language-label {
-        font-size: .86rem;
-      }
-
-      header {
-        min-height: 65vh;
-        padding: 90px 10px 40px;
-      }
-
-      .titre {
-        padding: 35px 18px;
-      }
-
-      .page {
-        width: min(calc(100% - 20px), 900px);
-      }
-
-      .contenu {
-        padding: 28px 20px;
-      }
-
-      .bouton-details {
-        padding-left: 16px;
-        font-size: .92rem;
-      }
-
-      .icone-livre {
-        width: 62px;
-        height: 48px;
-      }
-    }
-  </style>
-</head>
-
+.bouton-details{padding-left:16px;font-size:.92rem}.icone-livre{width:62px;height:48px}}
+.retour-site{display:block;width:max-content;max-width:calc(100% - 32px);margin:18px auto 0;padding:10px 16px;border:1px solid rgba(255,255,255,.75);border-radius:7px;background:rgba(0,0,0,.48);color:white;text-decoration:none;text-align:center;font-weight:bold}.retour-site:hover,.retour-site:focus-visible{background:white;color:#222}
+.titre-ouvrage{
+    font-style:italic;
+}
+</style>
+<link href="langues.css" rel="stylesheet"/></head>
 <body>
-  <nav class="language-switcher" aria-label="Choix de la langue">
-    <button class="language-choice" data-lang="fr" type="button" aria-pressed="false">
-      <img src="blason-france.svg" alt="">
-      <span class="language-label">français</span>
-    </button>
-    <button class="language-choice" data-lang="eu" type="button" aria-pressed="false">
-      <img src="blason-navarre.svg" alt="">
-      <span class="language-label">basque</span>
-    </button>
-  </nav>
-
-  <header>
-    <div class="titre">
-      <h1 id="titreProduit">
-        <span data-fr="Manuel de la conversation"
-              data-eu="Mintzatzen ikhasteko esku-liburua">
-          Manuel de la conversation
-        </span>
-      </h1>
-      <p class="sous-titre" id="sousTitreProduit">abbés Darthayet et Daranatz</p>
-    </div>
-  </header>
-
-  <a class="retour-site"
-     href="https://herriabihotzean.github.io/herriabihotzean-site/langue-basque.html">
-    <span data-fr="← retour à la langue basque"
-          data-eu="← Eskualdunen hizkuntzarat itzuli">
-      ← retour à la langue basque
-    </span>
-  </a>
-
-  <main class="page">
-    <article class="contenu">
-      <h2>
-        <span data-fr="Écouter, comprendre et parler"
-              data-eu="Entzun, ulertu eta mintzatu">
-          Écouter, comprendre et parler
-        </span>
-      </h2>
-
-      <p data-lang="fr">
-        Le <em>Manuel de la conversation</em>, écrit par l’abbé Darthayet en 1861,
-        réédité plusieurs fois et finalement revu par l’abbé Daranatz en 1902,
-        est un guide complet d’apprentissage pratique du basque labourdin,
-        « le plus beau et le plus pur » (Darthayet). L’esprit de ce manuel est :
-        peu de théorie, beaucoup de pratique. Il est conçu pour être profitable
-        aux débutants comme aux locuteurs confirmés.
-      </p>
-
-      <p data-lang="eu" hidden>
-        <em>Mintzatzen ikhasteko esku-liburua</em>, Darthayet apezak 1861ean
-        idatzi eta hainbat aldiz berrargitaratu ondoan Daranatz apezak 1902an
-        berrikusi zuen, lapurteraren ikaskuntza praktikorako gida oso bat da,
-        Darthayeten hitzetan, « ederrena eta garbiena » den euskararena.
-        Eskuliburu hunen izpiritua hau da : teoria guti eta praktika ainitz.
-        Hasiberrientzat bezain onuragarri izateko egina da, baita hiztun
-        trebeentzat ere.
-      </p>
-
-      <p data-lang="fr">
-        En lisant les répliques en vis-à-vis dans chacune des langues, basque et
-        française, le lecteur s’imprègne progressivement des tournures de phrases
-        et expressions basques qui sont mises en scène dans des dialogues et
-        correspondances. C’est pour faciliter leur mémorisation que nous proposons,
-        en complément du manuel écrit, les enregistrements audio correspondant à
-        l’avant-propos, aux cinquante dialogues, aux dix modèles de lettres et aux
-        proverbes basques du manuel.
-      </p>
-
-      <p data-lang="eu" hidden>
-        Euskarazko eta frantsesezko erantzunak parez pare irakurriz, irakurlea
-        emeki-emeki solasaldi eta gutunetan agertzen diren euskal esamoldeez
-        jabetzen da. Haien oroimena errazteko, liburuaz gain aitzin-solasaren,
-        berrogeita hamar solasaldien, hamar gutun ereduen eta erran-zaharren
-        grabaketak eskaintzen ditugu.
-      </p>
-
-      <p data-lang="fr">
-        De fait, l’écoute répétée des dialogues en basque, tout en en connaissant
-        le sens exact, facilite la compréhension fine de la structure de la langue
-        et en même temps la mémorisation d’expressions caractéristiques qui
-        jalonneront efficacement l’apprentissage.
-      </p>
-
-      <p data-lang="eu" hidden>
-        Solasaldiak behin eta berriz entzuteak, haien erranahi zehatza ezagutuz,
-        hizkuntzaren egitura hobeki ulertzea eta ikaskuntza aberastuko duten
-        esamolde bereziak gogoan hartzea errazten du.
-      </p>
-
-      <div class="caracteristiques">
-        <p><strong><span data-fr="61 dialogues ou lettres accessibles séparément"
-                         data-eu="61 bitarteko solas edo gutun, berex entzungai">
-          61 dialogues ou lettres accessibles séparément
-        </span></strong></p>
-
-        <p><strong><span data-fr="Lecture continue automatique"
-                         data-eu="Entzunaldi jarraitu bere baitharik">
-          Lecture continue automatique
-        </span></strong></p>
-
-        <p><strong><span data-fr="Écoute sur téléphone, tablette et ordinateur"
-                         data-eu="Telefonoan, tabletan eta ordenagailuan entzun daiteke">
-          Écoute sur téléphone, tablette et ordinateur
-        </span></strong></p>
-      </div>
-
-      <p data-lang="fr">
-        Certains peuvent penser à première vue que la manière de parler basque a
-        évolué depuis 1861 et que tout ceci a donc un parfum désuet. L’évolution
-        de la langue est certes une réalité inévitable, elle est même un bon signe
-        de vitalité. Seules les langues qui ne servent pas n’évoluent pas.
-        Cependant, comme on le voit en français, lire, écouter et s’approprier les
-        expressions « anciennes » pour les remettre en circulation est une belle
-        manière d’à nouveau enrichir la langue de tournures oubliées et pourtant
-        si élégantes et efficaces !
-      </p>
-
-      <p data-lang="eu" hidden>
-        Zenbaitek lehen behakoan uste izan dezakete 1861az geroz euskararen
-        mintzatzeko moldea aldatu dela eta guzi hunek, beraz, zaharkitu usain
-        zerbait baduela. Hizkuntzaren bilakaera ezin baztertuzko egia da, eta
-        haren bizi-indarraren seinale ederra ere bai. Ez baitira baliatzen ez
-        diren hizkuntzak baizik aldatzen ez direnak. Halere, frantsesean ikus
-        daitekeen bezala, erran-molde « zaharrak » irakurtzea, entzutea eta gure
-        egitea, berriz ere haiek erabileran ezartzeko, hizkuntza ahantziak izan
-        diren eta halere hain ederrak eta eraginkorrak diren itzuliez aberasteko
-        bide ederra da.
-      </p>
-
-      <p data-lang="fr">
-        Quelques exemples d’expressions tirées du manuel :
-        « zortzi egun emaiten zuten Bordelerat heltzeko » pour
-        « il leur fallait huit jours pour aller à Bordeaux », qui signifie
-        littéralement « ils donnaient huit jours pour… ». Ça ne s’invente pas !
-        « Ai ! burua itzulika ari zait » signifiant « la tête me tourne » pour
-        « j’ai la tête qui tourne ». « Bego hori nere gain »,
-        « que cela soit à ma charge », à comprendre « je m’en charge moi-même ».
-      </p>
-
-      <p data-lang="eu" hidden>
-        Eskuliburutik hartutako erran-molde zenbait hemen :
-        « zortzi egun emaiten zuten Bordelerat heltzeko », hau da,
-        « Bordelerat joaiteko zortzi egun behar zituzten », hitzez hitz
-        « zortzi egun emaiten zituzten... » erran nahi duena. Hori ez da
-        asmatzen ! « Ai ! burua itzulika ari zait », hots,
-        « burua itzultzen zait ». Edo berriz : « Bego hori nere gain »,
-        erran nahi baita : « hori nik neure gain hartzen dut », edo, gaurko
-        hitzez, « nihaurek eginen dut ».
-      </p>
-
-      <p data-lang="fr">
-        Autour de ces dialogues et de ces lettres, on trouve les éléments
-        indispensables à l’apprentissage de la langue : des tableaux de
-        déclinaisons, de conjugaisons, un dictionnaire. La construction de la
-        langue y est présentée de manière progressive, peu théorique.
-      </p>
-
-      <p data-lang="eu" hidden>
-        Solasaldi eta gutun horien inguruan hizkuntza ikasteko beharrezko diren
-        gaiak aurkitzen dira: deklinabide- eta aditz-taulak eta hiztegi bat.
-        Hizkuntzaren egitura emeki eta teoria gutirekin aurkezten da.
-      </p>
-
-      <p>
-        <span data-fr="Il est possible de se procurer le livre en suivant le lien ci-dessous."
-              data-eu="Liburua beherako esteka erabiliz eskura daiteke.">
-          Il est possible de se procurer le livre en suivant le lien ci-dessous.
-        </span>
-      </p>
-
-      <a class="bouton-details" href="livre.html">
-        <span data-fr="Plus de détails / commander le livre"
-              data-eu="Xehetasun gehiago / liburua manatu">
-          Plus de détails / commander le livre
-        </span>
-        <img class="icone-livre" src="livre.png" alt="" aria-hidden="true">
-      </a>
-    </article>
-  </main>
-
-  <div class="bandeau-ecouter">
-    <button id="ouvrirLecteur" type="button" aria-label="ÉCOUTER MAINTENANT">
-      <span data-fr="ÉCOUTER MAINTENANT" data-eu="ORAI ENTZUN">
-        ÉCOUTER MAINTENANT
-      </span>
-    </button>
-  </div>
-
-  <div id="lecteurPleinEcran" aria-hidden="true">
-    <iframe id="cadreLecteur"
-            src="index.html"
-            title="Lecteur du Manuel de la conversation"
-            allow="autoplay; fullscreen"
-            allowfullscreen></iframe>
-  </div>
-
-  <script>
-
-   "use strict";
+<header><div class="titre"><h1 id="titreProduit">Manuel de la conversation</h1><p class="sous-titre" id="sousTitreProduit">abbés Darthayet et Daranatz</p></div></header>
+<a class="retour-site" href="https://herriabihotzean.github.io/herriabihotzean-site/langue-basque.html">← retour à la langue basque</a>
+<main class="page"><article class="contenu">
+<h2>Écouter, comprendre et parler</h2>
+<p>Le <span class="titre-ouvrage">Manuel de la conversation</span> écrit par l’abbé Darthayet en 1861, réédité plusieurs fois et finalement revu par l’abbé Daranatz en 1902, est un guide complet d’apprentissage pratique du basque labourdin, « le plus beau et le plus pur » (Darthayet). L’esprit de ce manuel est : peu de théorie, beaucoup de pratique. Il est conçu pour être profitable aux débutants comme aux locuteurs confirmés.</p>
+<p>En lisant les répliques en vis-à-vis dans chacune des langues, basque et française, le lecteur s’imprègne progressivement des tournures de phrases et expressions basques qui sont mises en scène dans des dialogues et correspondances. C’est pour faciliter leur mémorisation que nous proposons, en complément du manuel écrit, les enregistrements audio correspondant à l’avant-propos, aux cinquante dialogues, aux dix modèles de lettres et aux proverbes basques du manuel.</p>
+<p>De fait, l’écoute répétée des dialogues en basque, tout en en connaissant le sens exact, facilite la compréhension fine de la structure de la langue et en même temps la mémorisation d’expressions caractéristiques qui jalonneront efficacement l’apprentissage.</p>
+<div class="caracteristiques"><p><strong>61 dialogues ou lettres accessibles séparément</strong></p><p><strong>Lecture continue automatique</strong></p><p><strong>Écoute sur téléphone, tablette et ordinateur</strong></p></div>
+<p>Certains peuvent penser à première vue que la manière de parler basque a évolué depuis 1861 et que tout ceci a donc un parfum désuet. L’évolution de la langue est certes une réalité inévitable, elle est même un bon signe de vitalité. Seules les langues qui ne servent pas n’évoluent pas. Cependant, comme on le voit en français, lire, écouter et s’approprier les expressions « anciennes » pour les remettre en circulation est une belle manière d’à nouveau enrichir la langue de tournures oubliées et pourtant si élégantes et efficaces !</p>
+<p>Quelques exemples d’expressions tirées du manuel : « zortzi egun emaiten zuten Bordelerat heltzeko » pour « il leur fallait huit jours pour aller à Bordeaux », qui signifie littéralement « ils donnaient huit jours pour… ». Ça ne s’invente pas ! « Ai ! burua itzulika ari zait » signifiant « la tête me tourne » pour « j’ai la tête qui tourne ». « Bego hori nere gain », « que cela soit à ma charge », à comprendre « je m’en charge moi-même ».</p>
+<p>Autour de ces dialogues et de ces lettres, on trouve les éléments indispensables à l’apprentissage de la langue : des tableaux de déclinaisons, de conjugaisons, un dictionnaire. La construction de la langue y est présentée de manière progressive, peu théorique.</p>
+<p>Il est possible de ce procurer le livre en suivant le lien ci-dessous.</p>
+<a class="bouton-details" href="livre.html"><span>Plus de détails / commander le livre</span><img alt="" aria-hidden="true" class="icone-livre" src="livre.png"/></a>
+</article></main>
+<div class="bandeau-ecouter"><button id="ouvrirLecteur" type="button">ÉCOUTER MAINTENANT</button></div>
+<div aria-hidden="true" id="lecteurPleinEcran"><iframe allow="autoplay; fullscreen" allowfullscreen="" id="cadreLecteur" src="index.html" title="Lecteur du Manuel de la conversation"></iframe></div>
+<script>
+"use strict";
 
 const URL_APPS_SCRIPT =
     "https://script.google.com/macros/s/AKfycbz4yyMo6MlH493KkoFDMjgRHIOrvc88-hHMn-QMAeRZHPX8X2Xubpk8fsndOU-1nXREoA/exec";
@@ -730,8 +256,6 @@ document.addEventListener(
     "webkitfullscreenchange",
     synchroniserEtatPleinEcran
 );
-  
-  </script>
-  <script src="langues.js"></script>
-</body>
+</script>
+<script src="langues.js"></script></body>
 </html>

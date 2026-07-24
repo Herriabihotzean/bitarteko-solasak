@@ -6,19 +6,3 @@
 @media(max-width:520px){.language-choice .language-label{font-size:.72rem!important}}
 
 .language-choice.active .language-label{font-weight:700!important}
-
-
-[data-lang][hidden]{display:none!important}
-
-.language-switcher{
-  position:relative!important;
-  z-index:6000!important;
-  display:flex!important;
-  visibility:visible!important;
-  opacity:1!important;
-}
-.language-choice{
-  display:flex!important;
-  visibility:visible!important;
-  opacity:1!important;
-}
