@@ -17,8 +17,8 @@ main{margin-bottom:40px}.contenu{padding:clamp(28px,6vw,65px);border-radius:5px;
 h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>p{margin:0 0 1.35em;font-size:clamp(1.05rem,2.5vw,1.22rem);text-align:justify;hyphens:auto}
 .caracteristiques{margin:40px 0;padding:25px;border-top:1px solid rgba(255,255,255,.35);border-bottom:1px solid rgba(255,255,255,.35);text-align:center}.caracteristiques p{margin:8px 0}
 .bouton-details{display:flex;align-items:center;justify-content:center;gap:14px;width:min(560px,100%);min-height:74px;margin:45px auto 5px;padding:12px 18px 12px 24px;border:2px solid white;border-radius:7px;background:rgba(255,255,255,.08);color:white;font:inherit;font-size:1.02rem;font-weight:bold;text-align:center;text-decoration:none;transition:.2s}.bouton-details:hover,.bouton-details:focus-visible{background:white;color:#222;transform:translateY(-2px)}.icone-livre{width:74px;height:54px;object-fit:contain;flex:0 0 auto}
-.bandeau-ecouter{position:fixed;z-index:1000;right:0;bottom:0;left:0;min-height:82px;padding:12px max(18px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));background:rgba(115,0,0,.97);box-shadow:0 -5px 20px rgba(0,0,0,.35)}
-#ouvrirLecteur{display:block;width:min(760px,100%);min-height:56px;margin:0 auto;border:2px solid white;border-radius:7px;background:white;color:#790000;font:inherit;font-size:clamp(1.05rem,3.5vw,1.35rem);font-weight:bold;letter-spacing:.05em;cursor:pointer}
+.bandeau-ecouter{position:fixed;z-index:5500;right:0;bottom:0;left:0;min-height:82px;padding:12px max(18px,env(safe-area-inset-right)) calc(12px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));background:rgba(115,0,0,.97);box-shadow:0 -5px 20px rgba(0,0,0,.35)}
+#ouvrirLecteur{display:block!important;visibility:visible!important;opacity:1!important;width:min(760px,100%);min-height:56px;margin:0 auto;border:2px solid white;border-radius:7px;background:white;color:#790000;font:inherit;font-size:clamp(1.05rem,3.5vw,1.35rem);font-weight:bold;letter-spacing:.05em;cursor:pointer}
 #lecteurPleinEcran{position:fixed;z-index:5000;inset:0;display:none;width:100vw;height:100dvh;background:#111;overflow:hidden}#lecteurPleinEcran.ouvert{display:block}#cadreLecteur{display:block;width:100vw;height:100dvh;border:0;background:#111}
 @media(max-width:600px){body{background-attachment:scroll}header{min-height:65vh;padding:40px 10px}.titre{padding:35px 18px}.page{width:min(100% - 20px,900px)}.contenu{padding:28px 20px}
 .contenu>p{
@@ -37,6 +37,20 @@ h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>
   <link href="langues.css" rel="stylesheet"/>
  </head>
  <body>
+  <nav aria-label="Choix de la langue" class="language-switcher">
+   <button aria-pressed="false" class="language-choice" data-lang="fr" type="button">
+    <img alt="" src="blason-france.svg"/>
+    <span class="language-label" data-label-eu="frantsesez" data-label-fr="français">
+     français
+    </span>
+   </button>
+   <button aria-pressed="false" class="language-choice" data-lang="eu" type="button">
+    <img alt="" src="blason-navarre.svg"/>
+    <span class="language-label" data-label-eu="eskuaraz" data-label-fr="basque">
+     basque
+    </span>
+   </button>
+  </nav>
   <header>
    <div class="titre">
     <h1 id="titreProduit">
@@ -147,7 +161,7 @@ h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>
    </article>
   </main>
   <div class="bandeau-ecouter">
-   <button id="ouvrirLecteur" type="button">
+   <button aria-label="ÉCOUTER MAINTENANT" id="ouvrirLecteur" type="button">
     <span data-eu="ORAI ENTZUN" data-fr="ÉCOUTER MAINTENANT">
      ÉCOUTER MAINTENANT
     </span>

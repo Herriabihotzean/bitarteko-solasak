@@ -9,3 +9,16 @@
 
 
 [data-lang][hidden]{display:none!important}
+
+.language-switcher{
+  position:relative!important;
+  z-index:6000!important;
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+.language-choice{
+  display:flex!important;
+  visibility:visible!important;
+  opacity:1!important;
+}

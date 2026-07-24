@@ -8,7 +8,6 @@ const HB_LABELS = {
   eu: { fr: "frantsesez", eu: "eskuaraz" }
 };
 
-/* Textes créés dynamiquement par les autres scripts. */
 const HB_DYNAMIC_TRANSLATIONS = {
   eu: {
   "Manuel de la conversation": "Mintzatzen ikhasteko esku-liburua",
@@ -114,28 +113,31 @@ const HB_DYNAMIC_TRANSLATIONS = {
     if (!clean) return original;
 
     const dictionary = HB_DYNAMIC_TRANSLATIONS[language] || {};
-    if (!Object.prototype.hasOwnProperty.call(dictionary, clean)) return original;
+
+    if (!Object.prototype.hasOwnProperty.call(dictionary, clean)) {
+      return original;
+    }
 
     return String(original).replace(clean, dictionary[clean]);
   }
 
-  function updateEmbeddedContent(language) {
+  function updateStaticContent(language) {
     document.querySelectorAll("[data-fr][data-eu]").forEach((element) => {
-      const value = element.dataset[language];
-      if (value !== undefined && element.innerHTML !== value) {
-        element.innerHTML = value;
-      }
+      const value = language === "eu" ? element.dataset.eu : element.dataset.fr;
+      if (value !== undefined) element.textContent = value;
     });
 
     document.querySelectorAll("[data-lang]").forEach((element) => {
+      if (element.classList.contains("language-choice")) return;
       element.hidden = element.dataset.lang !== language;
     });
 
-    const attributes = ["placeholder", "title", "aria-label", "alt"];
+    const attributeNames = ["placeholder", "title", "aria-label", "alt"];
+
     document.querySelectorAll("*").forEach((element) => {
-      attributes.forEach((name) => {
-        const suffix = language === "fr" ? "Fr" : "Eu";
-        const value = element.dataset[`${name}${suffix}`];
+      attributeNames.forEach((name) => {
+        const suffix = language === "eu" ? "Eu" : "Fr";
+        const value = element.dataset[name + suffix];
         if (value !== undefined) element.setAttribute(name, value);
       });
     });
@@ -151,15 +153,24 @@ const HB_DYNAMIC_TRANSLATIONS = {
     if (!node || !node.parentElement) return;
 
     const parent = node.parentElement;
-    if (["SCRIPT", "STYLE", "TEXTAREA", "NOSCRIPT"].includes(parent.tagName)) return;
-    if (parent.closest(".language-switcher, [data-lang], [data-fr][data-eu]")) return;
+
+    if (["SCRIPT", "STYLE", "TEXTAREA", "NOSCRIPT"].includes(parent.tagName)) {
+      return;
+    }
+
+    if (parent.closest(".language-switcher, [data-lang], [data-fr][data-eu]")) {
+      return;
+    }
 
     if (!originalTextNodes.has(node)) {
       originalTextNodes.set(node, node.nodeValue || "");
     }
 
     const original = originalTextNodes.get(node);
-    const next = language === "fr" ? original : dynamicTranslation(original, language);
+    const next = language === "fr"
+      ? original
+      : dynamicTranslation(original, language);
+
     if (node.nodeValue !== next) node.nodeValue = next;
   }
 
@@ -177,12 +188,20 @@ const HB_DYNAMIC_TRANSLATIONS = {
 
     names.forEach((name) => {
       if (!element.hasAttribute(name)) return;
-      if (element.hasAttribute(`data-${name}-fr`)) return;
+      if (element.hasAttribute("data-" + name + "-fr")) return;
 
-      if (!(name in originals)) originals[name] = element.getAttribute(name) || "";
+      if (!(name in originals)) {
+        originals[name] = element.getAttribute(name) || "";
+      }
+
       const original = originals[name];
-      const next = language === "fr" ? original : dynamicTranslation(original, language);
-      if (element.getAttribute(name) !== next) element.setAttribute(name, next);
+      const next = language === "fr"
+        ? original
+        : dynamicTranslation(original, language);
+
+      if (element.getAttribute(name) !== next) {
+        element.setAttribute(name, next);
+      }
     });
   }
 
@@ -197,7 +216,9 @@ const HB_DYNAMIC_TRANSLATIONS = {
     if (
       root.nodeType !== Node.ELEMENT_NODE &&
       root.nodeType !== Node.DOCUMENT_NODE
-    ) return;
+    ) {
+      return;
+    }
 
     if (root.nodeType === Node.ELEMENT_NODE) {
       translateDynamicAttributes(root, language);
@@ -209,6 +230,7 @@ const HB_DYNAMIC_TRANSLATIONS = {
     );
 
     let node;
+
     while ((node = walker.nextNode())) {
       if (node.nodeType === Node.TEXT_NODE) {
         translateDynamicTextNode(node, language);
@@ -218,51 +240,61 @@ const HB_DYNAMIC_TRANSLATIONS = {
     }
   }
 
-  function buildSwitcher() {
-    if (document.querySelector(".language-switcher")) return;
+  function ensureSwitcher() {
+    let nav = document.querySelector(".language-switcher");
 
-    const nav = document.createElement("nav");
-    nav.className = "language-switcher";
-    nav.setAttribute("aria-label", "Choix de la langue");
+    if (!nav) {
+      nav = document.createElement("nav");
+      nav.className = "language-switcher";
+      nav.setAttribute("aria-label", "Choix de la langue");
 
-    const images = {
-      fr: "blason-france.svg",
-      eu: "blason-navarre.svg"
-    };
+      const images = {
+        fr: "blason-france.svg",
+        eu: "blason-navarre.svg"
+      };
 
-    HB_LANGUAGES.forEach((language) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "language-choice";
-      button.dataset.lang = language;
+      HB_LANGUAGES.forEach((language) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "language-choice";
+        button.dataset.lang = language;
 
-      const image = document.createElement("img");
-      image.src = images[language];
-      image.alt = "";
+        const image = document.createElement("img");
+        image.src = images[language];
+        image.alt = "";
 
-      const label = document.createElement("span");
-      label.className = "language-label";
+        const label = document.createElement("span");
+        label.className = "language-label";
 
-      button.append(image, label);
-      button.addEventListener("click", () => setLanguage(language));
-      nav.appendChild(button);
+        button.append(image, label);
+        nav.appendChild(button);
+      });
+
+      document.body.insertBefore(nav, document.body.firstChild);
+    }
+
+    nav.querySelectorAll(".language-choice").forEach((button) => {
+      if (button.dataset.bound === "true") return;
+
+      button.dataset.bound = "true";
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.lang);
+      });
     });
-
-    document.body.insertBefore(nav, document.body.firstChild);
   }
 
   function updateSwitcher(language) {
-    const labels = HB_LABELS[language];
+    const labels = HB_LABELS[language] || HB_LABELS.fr;
 
     document.querySelectorAll(".language-choice").forEach((button) => {
       const code = button.dataset.lang;
       const label = button.querySelector(".language-label");
       const active = code === language;
 
-      if (label) label.textContent = labels[code];
+      if (label) label.textContent = labels[code] || "";
       button.classList.toggle("active", active);
       button.setAttribute("aria-pressed", active ? "true" : "false");
-      button.setAttribute("aria-label", labels[code]);
+      button.setAttribute("aria-label", labels[code] || "");
     });
   }
 
@@ -275,7 +307,7 @@ const HB_DYNAMIC_TRANSLATIONS = {
     storeLanguage(language);
 
     applying = true;
-    updateEmbeddedContent(language);
+    updateStaticContent(language);
     translateDynamicSubtree(document.body, language);
     updateSwitcher(language);
     document.documentElement.lang = language === "eu" ? "eu" : "fr";
@@ -301,11 +333,14 @@ const HB_DYNAMIC_TRANSLATIONS = {
       });
     });
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
   }
 
   function initialise() {
-    buildSwitcher();
+    ensureSwitcher();
     setLanguage(currentLanguage, { silent: true });
     startObserver();
   }
