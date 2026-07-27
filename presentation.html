@@ -128,7 +128,11 @@ h2{margin-top:0;font-size:clamp(1.55rem,4vw,2.25rem);text-align:center}.contenu>
     <p>
      Il est possible de ce procurer le livre en suivant le lien ci-dessous.
     </p>
-    <a class="bouton-details" href="livre.html">
+    <a
+     id="bouton-details-livre"
+     class="bouton-details"
+     href="https://herriabihotzean.github.io/herriabihotzean-site/produit.html?id=manuel-conversation&lang=fr"
+    >
      <span>
       Plus de détails / commander le livre
      </span>
@@ -348,7 +352,89 @@ document.addEventListener(
     synchroniserEtatPleinEcran
 );
   </script>
-  <script src="langues.js">
-  </script>
- </body>
+  <script src="langues.js"></script>
+
+<script>
+"use strict";
+
+(function () {
+
+  const boutonLivre =
+    document.getElementById(
+      "bouton-details-livre"
+    );
+
+  if (!boutonLivre) {
+    return;
+  }
+
+  function mettreAJourLienLivre(langue) {
+
+    const lang =
+      langue === "eu"
+        ? "eu"
+        : "fr";
+
+    boutonLivre.href =
+      "https://herriabihotzean.github.io/" +
+      "herriabihotzean-site/" +
+      "produit.html?id=manuel-conversation&lang=" +
+      lang;
+  }
+
+  /*
+   * Langue actuellement sélectionnée.
+   */
+  let langueInitiale =
+    "fr";
+
+  if (
+    typeof window.hbCurrentLanguage ===
+    "function"
+  ) {
+    langueInitiale =
+      window.hbCurrentLanguage() === "eu"
+        ? "eu"
+        : "fr";
+
+  } else {
+
+    try {
+      langueInitiale =
+        localStorage.getItem(
+          "herria_langue"
+        ) === "eu"
+          ? "eu"
+          : "fr";
+    } catch (_) {}
+  }
+
+  mettreAJourLienLivre(
+    langueInitiale
+  );
+
+  /*
+   * Si le visiteur change de langue
+   * alors qu'il est sur presentation.html.
+   */
+  document.addEventListener(
+    "herria-language-change",
+    function (evenement) {
+
+      const nouvelleLangue =
+        evenement.detail &&
+        evenement.detail.lang === "eu"
+          ? "eu"
+          : "fr";
+
+      mettreAJourLienLivre(
+        nouvelleLangue
+      );
+    }
+  );
+
+})();
+</script>
+
+</body>
 </html>
